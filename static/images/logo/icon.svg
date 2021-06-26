@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="1.5" clip-rule="evenodd" viewBox="0 0 56 56">
+  <g transform="translate(-436.3 -575.6) scale(1.30233)">
+    <path fill="none" d="M335 442h43v43h-43z"/>
+    <clipPath id="a">
+      <path d="M335 442h43v43h-43z"/>
+    </clipPath>
+    <g clip-path="url(#a)">
+      <circle cx="879.5" cy="654.5" r="397.5" fill="none" stroke="#29a4bc" stroke-width="79.2" transform="matrix(.04817 0 0 .04817 314.2 432)"/>
+      <g transform="matrix(.05086 0 0 .05086 309.5 436)">
+        <path fill="none" d="M925.5 540L549 419.3 653.3 800l406 116.5L1316 615.6 1227.3 315l-303.8-72.8 2 297.8z"/>
+        <clipPath id="b">
+          <path d="M925.5 540L549 419.3 653.3 800l406 116.5L1316 615.6 1227.3 315l-303.8-72.8 2 297.8z"/>
+        </clipPath>
+        <g clip-path="url(#b)">
+          <circle cx="879.5" cy="654.5" r="397.5" fill="none" stroke="#29a4bc" stroke-width="200.2" transform="matrix(.3747 0 0 .3747 593.9 294.9)"/>
+        </g>
+      </g>
+      <path fill="none" stroke="#29a4bc" stroke-linecap="square" stroke-linejoin="miter" stroke-width="3.8392999999999997" d="M356.6 445v11"/>
+    </g>
+  </g>
+</svg>

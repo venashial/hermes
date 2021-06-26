@@ -1,0 +1,274 @@
+/* font */
+@import url("https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;700&family=Roboto:wght@400;500;700&display=swap");
+
+/* variables */
+body {
+  --color-accent: #29a4bc;
+  --color-required: #eb6a6a;
+  --color-green: #2f9e4f;
+  --color-dark-green: #2b8947;
+  --color-red: #cb2431;
+  --color-dark-red: #a31212;
+  --color-focus: rgba(147, 161, 237, 0.5);
+  --title-font: "Kumbh Sans", "Inter-Medium", system-ui, -apple-system,
+    BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Helvetica, Arial,
+    sans-serif;
+  --body-font: -apple-system, Roboto, BlinkMacSystemFont, Segoe UI, Helvetica,
+    Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji;
+}
+
+[data-theme="light"] {
+  --color-background: #fefeff;
+  --color-text: #000000;
+  --color-medium: #767676;
+  --color-light: #d1d1d1;
+  --color-form-card: #f4f4f4;
+  --color-input-border: #e0e1e4;
+  --color-button: #e8e8e8;
+}
+
+[data-theme="dark"] {
+  --color-background: #313138;
+  --color-text: #ffffff;
+  --color-medium: #a0a0a0;
+  --color-light: #646464;
+  --color-form-card: #434247;
+  --color-input-border: rgb(164, 164, 172);
+  --color-button: #646464;
+}
+
+/* site */
+body {
+  font-family: var(--body-font);
+  font-size: 14px;
+  padding: 0 8vw;
+
+  background-color: var(--color-background);
+  color: var(--color-text);
+}
+
+@media only screen and (max-width: 820px) {
+  body {
+    padding: 0 1rem;
+  }
+}
+
+@media only screen and (min-width: 1400px) {
+  body {
+    padding: 0 15vw;
+  }
+}
+
+@media only screen and (min-width: 1700px) {
+  body {
+    padding: 0 20vw;
+  }
+}
+
+h1,
+h2,
+h3,
+.subheading,
+.label {
+  font-family: var(--title-font);
+}
+
+a {
+  color: var(--color-accent);
+  border-bottom: 0.2rem dotted var(--color-accent);
+  text-decoration: none;
+}
+
+a:hover {
+  border-bottom: 0.2rem solid var(--color-accent);
+}
+
+main {
+  padding-bottom: 2rem;
+}
+
+/* title-nav */
+.title-nav {
+  display: flex;
+  margin: 2rem 0;
+  justify-content: space-between;
+}
+
+@media only screen and (max-width: 850px) {
+  .title-nav {
+    margin-top: 1rem;
+    flex-direction: column-reverse;
+  }
+
+  nav {
+    margin-bottom: 1rem;
+  }
+}
+
+.title-icon {
+  display: flex;
+  align-items: center;
+
+  margin-bottom: 0.5rem;
+}
+
+.title-icon > svg {
+  width: 3.5rem;
+}
+
+.title-icon > h1 {
+  font-size: 2.7rem;
+  margin: 0.7rem 0 0 0.7rem;
+  line-height: 1;
+}
+
+.subheading {
+  font-size: 1.05rem;
+  color: var(--color-medium);
+}
+
+nav > a {
+  color: var(--color-medium);
+  font-size: 1rem;
+  line-height: 2;
+  margin-right: 0.5rem;
+
+  border-color: var(--color-medium);
+  border-width: 0.15rem !important;
+
+  white-space: pre;
+}
+
+nav > a:last-child {
+  margin-right: 0;
+}
+
+/* cards */
+h2 {
+  font-size: 1.43rem;
+}
+
+.card {
+  border: 0.1rem solid var(--color-light);
+  border-radius: 0.5rem;
+  padding: 0.9rem 1rem;
+
+  display: flex;
+  flex-direction: column;
+
+  margin-bottom: 2rem;
+}
+
+.card:last-child {
+  margin-bottom: 0;
+}
+
+.card > div {
+  margin-top: 0.75rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.card > div:first-child {
+  margin-top: 0;
+}
+
+/* forms */
+.card-form {
+  background-color: var(--color-form-card);
+}
+
+input,
+select,
+button {
+  padding: 0.2rem 0.6rem;
+  margin: 0 0 0.25rem 0;
+
+  border: 0.1rem solid var(--color-input-border);
+  border-radius: 0.4rem;
+
+  background-color: var(--color-background);
+
+  color: var(--color-text);
+
+  align-self: flex-start;
+}
+
+input:focus,
+select:focus,
+button:focus {
+  box-shadow: 0 0 0 0.2rem var(--color-focus);
+  outline: none;
+}
+
+select {
+  background: var(--color-background)
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' fill='%23919191'><polygon points='0,0 100,0 50,50'/></svg>")
+    no-repeat;
+  background-size: 12px;
+  background-position: calc(100% - 10px) 70%;
+  background-repeat: no-repeat;
+
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+
+  padding-right: 1.8rem;
+}
+
+.wide {
+  width: 90%;
+}
+
+.label {
+  font-weight: bold;
+  margin-bottom: 0.3rem;
+}
+
+.required::after {
+  content: "*";
+  color: var(--color-required);
+}
+
+button {
+  cursor: pointer;
+  padding: 0.2rem 0.8rem;
+  background-color: var(--color-button);
+  border-color: var(--color-medium);
+}
+
+.colored-button {
+  color: white;
+}
+
+.green {
+  background-color: var(--color-green);
+  border-color: var(--color-dark-green);
+}
+
+.red {
+  background-color: var(--color-red);
+  border-color: var(--color-dark-red);
+}
+
+.checkboxes > label {
+  margin-right: 0.75rem;
+}
+
+.thinner {
+  font-weight: lighter;
+}
+
+/* footer */
+footer {
+  text-align: right;
+  color: var(--color-medium);
+  margin-bottom: 1rem;
+}
+
+/* 404 */
+.four-o-four {
+	width: 100%;
+	text-align: center;
+	font-size: 200px;
+}

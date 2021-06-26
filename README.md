@@ -1,13 +1,13 @@
 # Hermes
 
-Hermes is a service that connects webhooks to Modrinth project releases. Hermes is built with a backend in Node and a frontend with vanilla JS. Hermes is not affilated with Modrinth.
+Hermes is a service that connects webhooks to Modrinth project releases. Hermes is built with a backend in NodeJS and a frontend using vanilla JS with EJS for templating. Hermes is not affilated with Modrinth.
 
 ## Usage
 1. Get a webhook URL from an app like Discord.
 2. Get your Modrinth project ID.
-3. Enter them at [venashial.games/hermes/](https://venashial.games/hermes/) or on your own local instance.
+3. Enter them at [venashial.design/hermes/](https://venashial.design/hermes/) or on your own local instance.
 
-> [venashial.games/hermes/](https://venashial.games/hermes/) will be unavailable until Hermes reaches a usable state.
+> [venashial.design/hermes/](https://venashial.design/hermes/) will be unavailable until Hermes reaches a usable state.
 
 ## Installation
 #### Docker (Recommended)

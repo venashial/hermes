@@ -3,11 +3,16 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "dev": "node index"
+    "dev": "NODE_ENV=development nodemon ./index.js localhost 8080",
+    "start": "NODE_ENV=production node index"
   },
   "dependencies": {
     "axios": "^0.21.1",
+    "ejs": "^3.1.6",
     "express": "^4.17.1",
     "sqlite3": "^5.0.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
   }
 }

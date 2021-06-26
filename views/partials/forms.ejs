@@ -1,0 +1,90 @@
+<h2>Add webhook</h2>
+<form class="card card-form" autocomplete="off">
+  <div>
+    <label for="payload_url" id="add_payload_url" class="label required">Payload URL</label>
+    <input
+      class="wide"
+      type="text"
+      name="payload_url"
+      placeholder="https://example.com/postreceive"
+    />
+  </div>
+
+  <div>
+    <label for="content_type" class="label">Content Type</label>
+    <select name="content_type">
+      <option value="json" selected>application/json</option>
+      <option value="form">application/x-www-form-urlencoded</option>
+    </select>
+  </div>
+
+  <div>
+    <label for="project_ids" class="label required">Modrinth Project IDs</label>
+    <input type="text" name="project_ids" placeholder="12345678" />
+    <template id="project_id_field">
+      <input type="text" name="project_ids" placeholder="12345678" />
+    </template>
+    <button
+      type="button"
+      class="button button-margin"
+      onclick="addProjectIDField()"
+    >
+      Add another project
+    </button>
+  </div>
+
+  <div>
+    <div class="label">Release Type</div>
+    <div class="checkboxes">
+      <input type="checkbox" name="release_type/release" checked />
+      <label for="release_type/release">Release</label>
+      <input type="checkbox" name="release_type/beta" checked />
+      <label for="release_type/beta">Beta</label>
+      <input type="checkbox" name="release_type/alpha" checked />
+      <label for="release_type/alpha">Alpha</label>
+    </div>
+  </div>
+
+  <div>
+    <div class="label">
+      Include additional data <span class="thinner">(If available)</span>
+    </div>
+    <div class="checkboxes">
+      <input type="checkbox" name="additional_data/description" checked />
+      <label for="additional_data/description">Project Description</label><br />
+      <input type="checkbox" name="additional_data/source_code" checked />
+      <label for="additional_data/source_code">Project Source Code</label><br />
+      <input type="checkbox" name="additional_data/discord" checked />
+      <label for="additional_data/discord">Project Discord</label><br />
+      <!-- TODO: Add Curseforge text input
+	  <input type="checkbox" name="data/curseforge" />
+      <label for="data/curseforge">Project Curseforge</label>
+	  -->
+    </div>
+  </div>
+
+  <div>
+    <button type="button" class="colored-button green" onclick="createWebhookRequest('add')">
+      Add webhook
+    </button>
+  </div>
+</form>
+
+<h2>Remove webhook</h2>
+<form class="card card-form" autocomplete="off">
+  <div>
+    <label for="payload_url" id="remove_payload_url" class="label required">Payload URL</label>
+    <input
+      class="wide"
+      type="text"
+      name="payload_url"
+      placeholder="https://example.com/postreceive"
+    />
+  </div>
+
+  <div>
+    <button type="button" class="colored-button red" onlick="createWebhookRequest('remove')">
+      Remove webhook
+    </button>
+  </div>
+</form>
