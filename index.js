@@ -21,6 +21,6 @@ app.get('*', function (req, res) {
 	});
 });
 
-const port = process.env.NODE_ENV === 'development' ? 8080 : 80
+const port = process.env.NODE_ENV === 'development' ? 8080 : 5000
 app.listen(port);
 console.log(`Server is listening on port ${port}`);
