@@ -1,5 +1,5 @@
 # Dockerfile
-FROM node:14.16.0-alpine
+FROM node:14.17.1-alpine
 
 # update and install dependency
 RUN apk update && apk upgrade
