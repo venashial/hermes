@@ -1,0 +1,13 @@
+{
+  "name": "hermes",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "dev": "node index"
+  },
+  "dependencies": {
+    "axios": "^0.21.1",
+    "better-sqlite3": "^7.4.1",
+    "express": "^4.17.1"
+  }
+}
