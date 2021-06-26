@@ -7,7 +7,7 @@
   },
   "dependencies": {
     "axios": "^0.21.1",
-    "better-sqlite3": "^7.4.1",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "sqlite3": "^5.0.2"
   }
 }
