@@ -12,6 +12,7 @@ function createWebhookRequest(form) {
 		webhook.payload_url = document.getElementById('add_payload_url').value
 		webhook.content_type = document.getElementsByName('content_type')[0].value
 		webhook.project_ids = [ ...document.getElementsByName('project_ids')].map(element => element.value).filter(project_id => project_id.length > 0)
+
 		webhook.release_type = []
 		if (document.getElementsByName('release_type/release')[0].value) {
 			webhook.release_type.push('release')
@@ -22,6 +23,15 @@ function createWebhookRequest(form) {
 		if (document.getElementsByName('release_type/alpha')[0].value) {
 			webhook.release_type.push('alpha')
 		}
+
+		webhook.mod_loader = []
+		if (document.getElementsByName('mod_loader/fabric')[0].value) {
+			webhook.mod_loader.push('fabric')
+		}
+		if (document.getElementsByName('mod_loader/forge')[0].value) {
+			webhook.mod_loader.push('forge')
+		}
+
 		webhook.additional_data = []
 		if (document.getElementsByName('additional_data/description')[0].value) {
 			webhook.additional_data.push('description')
