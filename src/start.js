@@ -1,10 +1,13 @@
 const express = require('express')
+const bodyParser = require('body-parser').json();
 const path = require('path')
 
 require('express-async-errors')
 
 module.exports = function startServer() {
   const app = express()
+
+  app.use(bodyParser);
 
   app.use(express.static(path.join(__dirname, '../static')))
 
