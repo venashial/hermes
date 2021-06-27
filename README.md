@@ -10,7 +10,7 @@ Hermes is a service that connects webhooks to Modrinth project releases. Hermes 
 ## Usage
 1. Get a webhook URL from an app like Discord.
 2. Get your Modrinth project ID.
-3. Enter them at a public instance listed below or on your own local instance.
+3. Enter both on a public instance listed below or on your own local instance.
 
 ## Public instances
 | Status | Uptime | URL |
