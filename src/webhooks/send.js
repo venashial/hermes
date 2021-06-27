@@ -142,6 +142,8 @@ function createBody({ project, version }, content_type) {
     }
   } else if (content_type === 'json') {
     return { project, version }
+  } else if (content_type === 'form') {
+    return { project, version }
   }
 }
 
