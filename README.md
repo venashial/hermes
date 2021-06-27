@@ -22,7 +22,7 @@ Hermes is a service that connects webhooks to Modrinth project releases. Hermes 
 Use the Docker image `ghcr.io/venashial/hermes`.
 
 #### Node
-Set up a dev enviroment and leave the process running.
+Clone the repo, install dependencies, and run `npm start`.
 
 ## Develop
 ```bash
