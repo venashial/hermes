@@ -1,5 +1,7 @@
+<% const env = process.env.NODE_ENV === 'development' ? 'dev' : 'prod'; %>
+
 <footer>
-	Running on <%= process.env.NODE_ENV === 'development' ? 'dev' : 'prod' %>-<%= version %>
+	<span class="blinking-dot <%= env %>">Running on <%= env %>-<%= version %></span>
 </footer>
 <script type="text/javascript" src="/scripts/theme.js"></script>
 <script type="text/javascript" src="/scripts/form.js"></script>

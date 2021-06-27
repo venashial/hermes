@@ -16,6 +16,9 @@
       <option value="json" selected>application/json</option>
       <option value="form">application/x-www-form-urlencoded</option>
     </select>
+    <div class="hint negative-mar">
+      Use <b>application/json</b> for Discord
+    </div>
   </div>
 
   <div>
@@ -61,11 +64,11 @@
     </div>
     <div class="checkboxes">
       <input type="checkbox" name="additional_data/description" checked />
-      <label for="additional_data/description">Project description</label><br />
+      <label for="additional_data/description">Description</label><br />
       <input type="checkbox" name="additional_data/source_code" checked />
-      <label for="additional_data/source_code">Project source code</label><br />
+      <label for="additional_data/source_code">Source code</label><br />
       <input type="checkbox" name="additional_data/discord" checked />
-      <label for="additional_data/discord">Project Discord</label><br />
+      <label for="additional_data/discord">Discord</label><br />
       <!-- TODO: Add Curseforge text input
 	  <input type="checkbox" name="data/curseforge" />
       <label for="data/curseforge">Project Curseforge</label>
@@ -77,6 +80,10 @@
     <button type="button" class="colored-button green" onclick="createWebhookRequest('add')">
       Add webhook
     </button>
+  </div>
+
+  <div class="hint" id="next_scan">
+    New versions are found in less than 30 minutes. Checks occur at **:00 and **:30.
   </div>
 </form>
 

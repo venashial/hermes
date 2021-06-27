@@ -4,7 +4,7 @@
   "private": true,
   "main": "index.js",
   "scripts": {
-    "dev": "NODE_ENV=development nodemon ./index.js localhost 8080",
+    "dev": "NODE_ENV=development nodemon --ignore ./views/ --ignore ./static/ ./index.js localhost 8080",
     "start": "NODE_ENV=production node ./index.js"
   },
   "dependencies": {

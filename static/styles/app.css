@@ -1,5 +1,5 @@
 /* font */
-@import url("https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;700&family=Roboto:wght@400;500;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;700&family=Roboto:wght@400;500;700&display=swap');
 
 /* variables */
 body {
@@ -9,15 +9,16 @@ body {
   --color-dark-green: #2b8947;
   --color-red: #cb2431;
   --color-dark-red: #a31212;
-  --color-focus: rgba(147, 161, 237, 0.5);
-  --title-font: "Kumbh Sans", "Inter-Medium", system-ui, -apple-system,
+  --color-yellow: #cbba24;
+  --color-focus: rgba(97, 121, 255, 0.411);
+  --title-font: 'Kumbh Sans', 'Inter-Medium', system-ui, -apple-system,
     BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Helvetica, Arial,
     sans-serif;
   --body-font: -apple-system, Roboto, BlinkMacSystemFont, Segoe UI, Helvetica,
     Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji;
 }
 
-[data-theme="light"] {
+[data-theme='light'] {
   --color-background: #fefeff;
   --color-text: #000000;
   --color-medium: #767676;
@@ -27,7 +28,7 @@ body {
   --color-button: #e8e8e8;
 }
 
-[data-theme="dark"] {
+[data-theme='dark'] {
   --color-background: #313138;
   --color-text: #ffffff;
   --color-medium: #a0a0a0;
@@ -226,7 +227,7 @@ select {
 }
 
 .required::after {
-  content: "*";
+  content: '*';
   color: var(--color-required);
 }
 
@@ -259,6 +260,17 @@ button {
   font-weight: lighter;
 }
 
+.hint {
+  margin-top: 0.25rem !important;
+  font-size: 0.8rem;
+  color: var(--color-medium);
+}
+
+.hint.negative-mar {
+  margin-top: -0.1rem !important;
+  margin-bottom: 0.25rem;
+}
+
 /* footer */
 footer {
   text-align: right;
@@ -266,9 +278,38 @@ footer {
   margin-bottom: 1rem;
 }
 
+.blinking-dot::after {
+  content: ' ';
+  margin-left: 0.5rem;
+  height: 0.7rem;
+  width: 0.7rem;
+  border-radius: 0.7rem;
+  display: inline-block;
+  background-color: var(--color-medium);
+  animation: blink 2.5s ease-in-out infinite;
+}
+
+.blinking-dot.dev::after {
+  background-color: var(--color-red);
+}
+
+.blinking-dot.prod::after {
+  background-color: var(--color-green);
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
 /* 404 */
 .four-o-four {
-	width: 100%;
-	text-align: center;
-	font-size: 200px;
+  width: 100%;
+  text-align: center;
+  font-size: 200px;
 }
