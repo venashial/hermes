@@ -10,14 +10,12 @@ Hermes is a service that connects webhooks to Modrinth project releases. Hermes 
 ## Usage
 1. Get a webhook URL from an app like Discord.
 2. Get your Modrinth project ID.
-3. Enter them at [venashial.design/hermes/](https://venashial.design/hermes/) or on your own local instance.
-
-> [venashial.design/hermes/](https://venashial.design/hermes/) will be unavailable until Hermes reaches a usable state.
+3. Enter them at a public instance listed below or on your own local instance.
 
 ## Public instances
 | Status | Uptime | URL |
 | --- | --- | --- |
-| ![](https://img.shields.io/website?style=for-the-badge&url=https%3A%2F%2Fhermes-webhooks.herokuapp.com%2F) | ![](https://img.shields.io/uptimerobot/ratio/key?style=for-the-badge) | [hermes-webhooks.herokuapp.com](https://hermes-webhooks.herokuapp.com/) |
+| ![](https://img.shields.io/website?style=for-the-badge&url=https%3A%2F%2Fhermes-webhooks.herokuapp.com%2F) | ![](https://img.shields.io/uptimerobot/ratio/key?style=for-the-badge) | [https://hermes-webhooks.herokuapp.com/](https://hermes-webhooks.herokuapp.com/) |
 
 ## Installation
 #### Docker (Recommended)
