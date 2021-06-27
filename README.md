@@ -1,4 +1,9 @@
-# Hermes
+<p align="center">
+  <img src="static/images/logo/icon.svg" width="90" title="Logo">
+</p>
+<h1 align="center">Hermes</h1>
+
+![](https://img.shields.io/github/package-json/v/venashial/hermes?style=for-the-badge) ![](https://img.shields.io/github/checks-status/venashial/hermes/master?style=for-the-badge) ![](https://img.shields.io/github/license/venashial/hermes?style=for-the-badge)
 
 Hermes is a service that connects webhooks to Modrinth project releases. Hermes is built with a backend in NodeJS and a frontend using vanilla JS with EJS for templating. Hermes is not affilated with Modrinth.
 
@@ -8,6 +13,11 @@ Hermes is a service that connects webhooks to Modrinth project releases. Hermes 
 3. Enter them at [venashial.design/hermes/](https://venashial.design/hermes/) or on your own local instance.
 
 > [venashial.design/hermes/](https://venashial.design/hermes/) will be unavailable until Hermes reaches a usable state.
+
+## Public instances
+| Status | Uptime | URL |
+| --- | --- | --- |
+| ![](https://img.shields.io/website?style=for-the-badge&url=https%3A%2F%2Fhermes-webhooks.herokuapp.com%2F) | ![](https://img.shields.io/uptimerobot/ratio/key?style=for-the-badge) | [hermes-webhooks.herokuapp.com](https://hermes-webhooks.herokuapp.com/) |
 
 ## Installation
 #### Docker (Recommended)
