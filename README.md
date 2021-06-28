@@ -24,6 +24,9 @@ Use the Docker image `ghcr.io/venashial/hermes`.
 #### Node
 Clone the repo, install dependencies, and run `npm start`.
 
+### Heroku
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+
 ## Develop
 ```bash
 # install dependencies
