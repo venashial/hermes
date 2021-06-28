@@ -2,6 +2,7 @@ const version = require('../../package.json').version
 
 module.exports = function (app) {
   require('./webhook')(app)
+  require('./feed')(app)
 
   // index page
   app.get('/', function (req, res) {
@@ -22,3 +23,4 @@ module.exports = function (app) {
     })
   })
 }
+ 
