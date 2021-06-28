@@ -30,6 +30,7 @@ Supported formats: `rss`, `atom`, `json`.
 | ![](https://img.shields.io/website?style=for-the-badge&url=https%3A%2F%2Fhermes-webhooks.herokuapp.com%2F) | ![](https://img.shields.io/uptimerobot/ratio/key?style=for-the-badge) | [https://hermes-webhooks.herokuapp.com/](https://hermes-webhooks.herokuapp.com/) |
 
 ## Installation
+> You must set the enviroment variable `DOMAIN` to your webpage doman (`example.com`) in all setups
 #### Docker (Recommended)
 Use the Docker image `ghcr.io/venashial/hermes`.
 

@@ -17,12 +17,9 @@ module.exports = function startServer() {
 
   app.set('view engine', 'ejs')
 
-  const port =
-    process.env.PORT || (process.env.NODE_ENV === 'development' ? 8080 : 5000)
-
   return new Promise((resolve) => {
-    const server = app.listen(port, () => {
-      console.log(`Listening on port ${server.address().port}`)
+    const server = app.listen(process.env.PORT, () => {
+      console.log(`Webpage ready at ${process.env.DOMAIN}`)
 
       const originalClose = server.close.bind(server)
 
