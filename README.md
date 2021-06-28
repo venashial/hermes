@@ -5,12 +5,15 @@
 
 ![](https://img.shields.io/github/package-json/v/venashial/hermes?style=for-the-badge) ![](https://img.shields.io/github/checks-status/venashial/hermes/master?style=for-the-badge) ![](https://img.shields.io/github/license/venashial/hermes?style=for-the-badge)
 
-Hermes is a service that connects webhooks to Modrinth project releases. Hermes is built with a backend in NodeJS and a frontend using vanilla JS with EJS for templating. Hermes is not affilated with Modrinth.
+Hermes is a service that connects webhooks to Modrinth project releases. In addition, it has a RSS, Atom, and JSON feeds for Modrinth projects. The Hermes backend uses NodeJS with better-sqlite3. The frontend uses vanilla JS with server-side EJS for templating.
 
 ## Usage
+### Webhooks
 1. Get a webhook URL from an app like Discord.
 2. Get your Modrinth project ID.
 3. Enter both on a public instance listed below or on your own local instance.
+
+### Feeds (RSS, Atom, JSON)
 
 ## Public instances
 | Status | Uptime | URL |
@@ -41,3 +44,7 @@ Pull requests are welcome.
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
+
+----
+
+Hermes is not affilated with Modrinth.
