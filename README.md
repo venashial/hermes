@@ -30,14 +30,16 @@ Supported formats: `rss`, `atom`, `json`.
 | ![](https://img.shields.io/website?style=for-the-badge&url=https%3A%2F%2Fhermes-webhooks.herokuapp.com%2F) | ![](https://img.shields.io/uptimerobot/ratio/key?style=for-the-badge) | [https://hermes-webhooks.herokuapp.com/](https://hermes-webhooks.herokuapp.com/) |
 
 ## Installation
-> You must set the enviroment variable `DOMAIN` to your webpage doman (`example.com`) in all setups
+> Required enviroment variables: <br />
+> **DOMAIN** (`'example.com'`) <br />
+> **DATABASE_URL** (`'postgres://user:password@examplepostgres.com/databasename'`)
 #### Docker (Recommended)
 Use the Docker image `ghcr.io/venashial/hermes`.
 
 #### Node
 Clone the repo, install dependencies, and run `npm start`.
 
-### Heroku
+#### Heroku
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
 ## Develop
