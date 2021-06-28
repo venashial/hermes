@@ -10,10 +10,18 @@ Hermes is a service that connects webhooks to Modrinth project releases. In addi
 ## Usage
 ### Webhooks
 1. Get a webhook URL from an app like Discord.
-2. Get your Modrinth project ID.
+2. Get one or multiple Modrinth project IDs.
 3. Enter both on a public instance listed below or on your own local instance.
 
 ### Feeds (RSS, Atom, JSON)
+1. Get your Modrinth project ID.
+2. Make a feed URL using the structure `< hermes instance >.com/api/:format/:project_id`
+
+> Here's a feed URL example for [Lithium](https://modrinth.com/mod/lithium)
+> ```
+> https://hermes-webhooks.herokuapp.com/api/rss/gvQqBUqZ
+> ```
+
 
 ## Public instances
 | Status | Uptime | URL |
