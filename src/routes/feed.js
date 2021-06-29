@@ -13,7 +13,7 @@ module.exports = function (app) {
 
         res.send(feed)
 
-        console.log('📙 Rendered and sent feed')
+        console.log('[USER] 📙 Rendered and sent feed')
     }
   })
 }

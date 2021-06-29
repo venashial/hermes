@@ -22,7 +22,7 @@ module.exports = function startServer() {
 
   return new Promise((resolve) => {
     const server = app.listen(process.env.PORT, () => {
-      console.log(`🚀 Webpage ready at ${process.env.DOMAIN}`)
+      console.log(`[STARTUP] 🚀 Webpage ready at ${process.env.DOMAIN}`)
 
       const originalClose = server.close.bind(server)
 
@@ -61,7 +61,7 @@ function setupCloseOnExit(server) {
     await server
       .close()
       .then(() => {
-        console.info('🌙 Server successfully closed')
+        console.info('[SHUTDOWN] 🌙 Server successfully closed')
       })
 
       .catch((e) => {

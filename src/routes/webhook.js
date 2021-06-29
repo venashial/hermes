@@ -20,11 +20,11 @@ const postSchema = {
         filter: {
           type: 'object',
           properties: {
-            release_type: {
+            version_type: {
               type: 'array',
               items: { type: 'string' },
             },
-            release_type: {
+            version_type: {
               type: 'array',
               items: { type: 'string' },
             },
@@ -83,8 +83,7 @@ module.exports = function (app) {
     
     let vetted_projects = []
 
-    for (const index in webhook.project_ids) {
-      const project_id = webhook.project_ids[index]
+    for (const project_id of webhook.project_ids) {
       if (await db.existingProjectById(project_id)) {
         vetted_projects.push({ modrinthProject: {}, project_id })
       } else {
@@ -98,8 +97,8 @@ module.exports = function (app) {
       }
     }
 
-    for (const index in vetted_projects) {
-      let { project_id, modrinthProject } = vetted_projects[index]
+    for (vetted_project of vetted_projects) {
+      let { project_id, modrinthProject } = vetted_project
 
       if (modrinthProject.id) {
         // New project
@@ -108,12 +107,12 @@ module.exports = function (app) {
         await db.newProject({ project_id, last_updated: modrinthProject.updated, last_version_id: modrinthVersions[0].id })
       }
 
-      await db.newWebhook({ project_id, payload_url: webhook.payload_url, config: webhook.config })
+      await db.newWebhook({ project_id, payload_url: webhook.payload_url, content_type: webhook.content_type, config: webhook.config })
     }
 
-    res.status(200).send('Successfully added webhook:' + webhook.payload_url)
+    res.status(200).send('Successfully added webhook: ' + webhook.payload_url)
 
-    console.log('🪝  Added new webhook')
+    console.log('[USER] 🪝  Added new webhook')
   })
 
   app.delete('/api/webhook', async function (req, res) {
@@ -135,7 +134,7 @@ module.exports = function (app) {
 
     await db.removeWebhooksByUrl(webhook.payload_url)
 
-    console.log('💥 Removed webhook')
+    console.log('[USER] 💥 Removed webhook')
   })
 }
 

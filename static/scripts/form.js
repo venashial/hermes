@@ -18,22 +18,22 @@ async function createWebhookRequest(form) {
     webhook.config = {}
     webhook.config.filter = {}
 
-    webhook.config.filter.release_type = []
-    if (document.getElementsByName('release_type/release')[0].value) {
-      webhook.config.filter.release_type.push('release')
+    webhook.config.filter.version_type = []
+    if (document.getElementsByName('version_type/release')[0].checked) {
+      webhook.config.filter.version_type.push('release')
     }
-    if (document.getElementsByName('release_type/beta')[0].value) {
-      webhook.config.filter.release_type.push('beta')
+    if (document.getElementsByName('version_type/beta')[0].checked) {
+      webhook.config.filter.version_type.push('beta')
     }
-    if (document.getElementsByName('release_type/alpha')[0].value) {
-      webhook.config.filter.release_type.push('alpha')
+    if (document.getElementsByName('version_type/alpha')[0].checked) {
+      webhook.config.filter.version_type.push('alpha')
     }
 
     webhook.config.filter.mod_loader = []
-    if (document.getElementsByName('mod_loader/fabric')[0].value) {
+    if (document.getElementsByName('mod_loader/fabric')[0].checked) {
       webhook.config.filter.mod_loader.push('fabric')
     }
-    if (document.getElementsByName('mod_loader/forge')[0].value) {
+    if (document.getElementsByName('mod_loader/forge')[0].checked) {
       webhook.config.filter.mod_loader.push('forge')
     }
 
@@ -64,30 +64,6 @@ async function createWebhookRequest(form) {
   if (response.ok) {
     clearForm(form)
   }
-}
-
-function setNextScan() {
-  const date = new Date()
-  let minutes = 60 - date.getMinutes()
-
-  if (minutes >= 30) {
-    minutes -= 30
-  }
-
-  next_scan = document.getElementById('next_scan')
-
-  next_scan.innerText = `New versions are found in less than 30 minutes. Checks occur at **:00 and **:30. The next scan is ${
-    minutes !== 0 ? 'in ' + minutes + ' minutes' : 'happening right now'
-  }.`
-
-  setTimeout(setNextScan, 60000 - date.getSeconds() * 1000 + 100)
-}
-
-setNextScan()
-
-// Helpers
-function insertAfter(referenceNode, newNode) {
-  referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling)
 }
 
 async function send(method = 'GET', url = '', data = {}) {
@@ -141,11 +117,11 @@ function clearForm(form) {
       }
     })
 
-    document.getElementsByName('release_type/release')[0].value = true
-    document.getElementsByName('release_type/beta')[0].value = true
-    document.getElementsByName('release_type/alpha')[0].value = true
-    document.getElementsByName('mod_loader/fabric')[0].value = true
-    document.getElementsByName('mod_loader/forge')[0].value = true
+    document.getElementsByName('version_type/release')[0].checked = true
+    document.getElementsByName('version_type/beta')[0].checked = true
+    document.getElementsByName('version_type/alpha')[0].checked = true
+    document.getElementsByName('mod_loader/fabric')[0].checked = true
+    document.getElementsByName('mod_loader/forge')[0].checked = true
     document.getElementsByName('additional_data/author')[0].checked = true
     document.getElementsByName('additional_data/description')[0].checked = true
     document.getElementsByName('additional_data/source_code')[0].checked = true
@@ -153,4 +129,29 @@ function clearForm(form) {
   } else if (form === 'remove') {
     document.getElementById('remove_payload_url').value = ''
   }
+}
+
+// Next scan countdown
+function setNextScan() {
+  const date = new Date()
+  let minutes = 60 - date.getMinutes()
+
+  if (minutes >= 30) {
+    minutes -= 30
+  }
+
+  next_scan = document.getElementById('next_scan')
+
+  next_scan.innerText = `New versions are found in less than 30 minutes. Checks occur at **:00 and **:30. The next scan is ${
+    minutes !== 0 ? 'in ' + minutes + ' minutes' : 'happening right now'
+  }.`
+
+  setTimeout(setNextScan, 60000 - date.getSeconds() * 1000 + 100)
+}
+
+setNextScan()
+
+// Helpers
+function insertAfter(referenceNode, newNode) {
+  referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling)
 }

@@ -1,25 +1,25 @@
 const axios = require('axios').default
 
-module.exports.send = (
+module.exports.send = async (
   url,
   { project, version },
   content_type,
-  config = {}
+  config
 ) => {
-  ({ project, version } = applyRowConfig({ project, version }, config))
+  if ((version.loaders.length == 2 || config.filter.mod_loader.includes(version.loaders[0])) && config.filter.version_type.includes(version.version_type)) {
+    const body = createBody({ project, version }, content_type, config)
 
-  const body = createBody({ project, version }, content_type)
-
-  axios({
-    method: 'post',
-    url: url,
-    data: body,
-  }).catch(function (error) {
-    console.log('Webhook failed to send\n', error.response)
-  })
+    await axios({
+      method: 'post',
+      url: url,
+      data: body,
+    }).catch(function (error) {
+      console.log('Webhook failed to send\n', error.response)
+    })
+  }
 }
 
-function applyRowConfig({ project, version }, config) {
+module.exports.applyRowConfig = ({ project, version }, config) => {
   if (config.hiddenItems) {
     if (config.hiddenItems.includes('author')) {
       delete project.author
@@ -43,14 +43,24 @@ function applyRowConfig({ project, version }, config) {
   return { project, version }
 }
 
-function createBody({ project, version }, content_type) {
+function createBody({ project, version }, content_type, config) {
   let body
   if (content_type === 'discord') {
     body = {
       content: null,
       embeds: [
         {
-          title: project.title,
+          title: `${project.title}${
+            config.filter.mod_loader.length == 1 &&
+            config.filter.version_type.length == 1
+              ? ''
+              : config.filter.mod_loader.length == 1 &&
+                config.filter.version_type.length != 1
+              ? ` (${version.version_type})`
+              : config.filter.version_type.length == 1
+              ? ` (${version.loaders.join(' & ') + ' '})`
+              : ` (${version.loaders.join(' & ') + ' '} ${version.version_type})`
+          }`,
           description: project.description,
           url: project.url,
           color: parseInt(`0x${project.primary_color.substring(1)}`, 16),
@@ -89,6 +99,7 @@ function createBody({ project, version }, content_type) {
           thumbnail: {
             url: project.icon_url,
           },
+          timestamp: version.date,
         },
       ],
       username: project.title,
@@ -100,8 +111,15 @@ function createBody({ project, version }, content_type) {
         value: version.changelog,
       })
     }
+    if (project.description) {
+      body.embeds[0].description = project.description
+    }
     if (project.author) {
-      body.embeds[0].author = project.author
+      body.embeds[0].author = {
+        name: project.author.username,
+        url: project.author.url,
+        icon_url: project.author.avatar_url,
+      }
     }
   } else if (content_type === 'json') {
     body = { project, version }

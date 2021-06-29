@@ -4,19 +4,19 @@ const Vibrant = require('node-vibrant')
 
 // Get multiple projects at once
 module.exports.getProjects = async (project_ids) => {
-  const projects = (
+  const modrinthProjects = (
     await axios.get(
       'https://api.modrinth.com/api/v1/mods?ids=' + JSON.stringify(project_ids)
     )
   ).data
 
-  const found = projects.map((project) => project.id)
+  const found = modrinthProjects.map((project) => project.id)
 
-  const missing = project_ids.filter(
+  const missingProjects = project_ids.filter(
     (project_id) => !found.includes(project_id)
   )
 
-  return { projects, missing }
+  return { modrinthProjects, missingProjects }
 }
 
 // Get one project
@@ -56,6 +56,7 @@ module.exports.formatData = async ({ modrinthProject, modrinthVersion }) => {
   const version = {
     name: modrinthVersion.name,
     changelog: modrinthVersion.changelog,
+    date: modrinthVersion.date_published,
     version_type: modrinthVersion.version_type,
     game_versions: modrinthVersion.game_versions,
     loaders: modrinthVersion.loaders,
