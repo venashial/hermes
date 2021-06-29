@@ -105,20 +105,20 @@ module.exports.start = async () => {
   await module.exports.openQueue()
 }
 
-cron.schedule('0,30 * * * * *', () => {
-  console.log('[SCAN] 💿 Starting scan')
-  module.exports.start()
-})
-
-/*
-cron.schedule(
-  '0,30 * * * *',
-  () => {
+if (process.env.NODE_ENV === 'development') {
+  cron.schedule('0 * * * * *', () => {
     console.log('[SCAN] 💿 Starting scan')
     module.exports.start()
-  }
-)
-*/
+  })
+} else {
+  cron.schedule(
+    '0,30 * * * *',
+    () => {
+      console.log('[SCAN] 💿 Starting scan')
+      module.exports.start()
+    }
+  )
+}
 
 module.exports.openQueue = async () => {
   // Get all webhooks in queue
