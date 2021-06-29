@@ -54,7 +54,13 @@ $ npm install
 $ npm run dev
 ```
 
-### Todo
+### TODOs
+#### Before release
+- [ ] Add docker postgres setup
+- [ ] Update development guide (with postgres)
+- [ ] Update Heroku instructions for always online instance (credit card & uptime bot)
+
+#### Sometime
 - [ ] Add curseforge links
 - [ ] Client side form errors
 - [ ] Modrinth project name preview
