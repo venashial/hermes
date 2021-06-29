@@ -109,7 +109,7 @@ function updateMessage(ok, message) {
   }
 
   if (message[0] === '{') {
-    message = 'Server error,' (JSON.parse(message)).message
+    message = 'Server error,' + (JSON.parse(message)).message
   }
 
   document.getElementById('message-text').innerText = message
