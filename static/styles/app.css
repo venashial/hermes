@@ -86,7 +86,7 @@ a, .link {
   cursor: pointer;
 }
 
-a:hover {
+a:hover, .link:hover {
   border-bottom: 0.2rem solid var(--color-accent);
 }
 
@@ -99,17 +99,6 @@ main {
   display: flex;
   margin: 2rem 0 1rem 0;
   justify-content: space-between;
-}
-
-@media only screen and (max-width: 850px) {
-  .title-nav {
-    margin-top: 1rem;
-    flex-direction: column-reverse;
-  }
-
-  nav {
-    margin-bottom: 1rem;
-  }
 }
 
 .title-icon {
@@ -134,6 +123,10 @@ main {
   color: var(--color-medium);
 }
 
+nav {
+  text-align: right;
+}
+
 nav > a, nav > .link {
   color: var(--color-medium);
   font-size: 1rem;
@@ -148,6 +141,24 @@ nav > a, nav > .link {
 
 nav > a:last-child {
   margin-right: 0;
+}
+
+@media only screen and (max-width: 500px) {
+  nav {
+    margin-left: 1.5rem;
+  }
+
+  .title-nav {
+    margin-top: 1rem;
+  }
+
+  .title-icon > h1, .subheading {
+    display: none;
+  }
+
+  .title-icon > svg {
+    width: 4rem;
+  }
 }
 
 /* cards */

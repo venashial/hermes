@@ -33,3 +33,6 @@ node_modules/
 
 # VScode
 .vscode
+
+# Database
+dev.sqlite3

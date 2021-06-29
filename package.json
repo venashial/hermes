@@ -4,8 +4,9 @@
   "private": true,
   "main": "index.js",
   "scripts": {
-    "dev": "NODE_ENV=development nodemon --ignore ./views/ --ignore ./static/ ./index.js localhost 8080",
-    "start": "NODE_ENV=production node ./index.js"
+    "dev": "NODE_ENV=development npx knex migrate:latest && NODE_ENV=development nodemon --ignore ./views/ --ignore ./static/ ./index.js localhost 8080",
+    "start": "NODE_ENV=production node ./index.js",
+    "lint": "eslint '**/*.js' --ignore-pattern node_modules/"
   },
   "dependencies": {
     "axios": "^0.21.1",
@@ -15,12 +16,16 @@
     "express-async-errors": "^3.1.1",
     "feed": "^4.2.2",
     "jsonschema": "^1.4.0",
+    "knex": "^0.95.6",
     "node-cron": "^3.0.0",
     "node-vibrant": "^3.2.1-alpha.1",
     "pg": "^8.6.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.7"
+    "eslint": "^7.29.0",
+    "eslint-config-prettier": "^8.3.0",
+    "nodemon": "^2.0.7",
+    "sqlite3": "^5.0.2"
   },
   "engines": {
     "node": "14.17.1"

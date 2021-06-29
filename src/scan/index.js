@@ -6,6 +6,18 @@ const modrinth = require('../modrinth')
 
 const webhooks = require('../webhooks')
 
+if (process.env.NODE_ENV === 'development') {
+  cron.schedule('0,30 * * * * *', () => {
+    console.log('[SCAN] 💿 Starting scan')
+    module.exports.start()
+  })
+} else {
+  cron.schedule('0,30 * * * *', () => {
+    console.log('[SCAN] 💿 Starting scan')
+    module.exports.start()
+  })
+}
+
 module.exports.start = async () => {
   // Get project ids from database
   const databaseProjects = await db.getAllProjects()
@@ -46,7 +58,9 @@ module.exports.start = async () => {
       ) {
         console.log('[SCAN] 🔍 Found new version(s)')
 
-        const modrinthVersions = (await modrinth.getVersions(modrinthProject.id)).reverse()
+        const modrinthVersions = (
+          await modrinth.getVersions(modrinthProject.id)
+        ).reverse()
         if (modrinthVersions) {
           // Find ID of last seen version
           let indexOfLastVersion = modrinthVersions
@@ -64,25 +78,34 @@ module.exports.start = async () => {
           }
 
           // Get new versions
-          const newModrinthVersions = modrinthVersions
-            .splice(indexOfLastVersion + 1)
+          const newModrinthVersions = modrinthVersions.splice(
+            indexOfLastVersion + 1
+          )
 
           // Add each version to queue
           await Promise.all(
             newModrinthVersions.map(async (modrinthVersion) => {
-              await db.newQueueItem({
-                project_id: modrinthProject.id,
-                data: await modrinth.formatData({
-                  modrinthProject,
-                  modrinthVersion,
-                }),
-                webhooks: JSON.stringify(
-                  (
-                    await db.getWebhooksByProject(modrinthProject.id)
-                  ).map((webhook) => webhook.id)
-                ),
-                version_date: modrinthVersion.date_published,
-              })
+              const webhook_rows = JSON.stringify(
+                (await db.getWebhooksByProject(modrinthProject.id)).map(
+                  (webhook) => webhook.id
+                )
+              )
+
+              if (webhook_rows.length > 0) {
+                await db.newQueueItem({
+                  project_id: modrinthProject.id,
+                  data: JSON.stringify(
+                    await modrinth.formatData({
+                      modrinthProject,
+                      modrinthVersion,
+                    })
+                  ),
+                  webhooks: webhook_rows,
+                  version_date: modrinthVersion.date_published,
+                })
+              } else {
+                await db.removeProjectById(modrinthProject.id)
+              }
             })
           )
 
@@ -95,7 +118,8 @@ module.exports.start = async () => {
           // Update project in DB
           await db.updateProjectById(modrinthProject.id, {
             last_updated: modrinthProject.updated,
-            last_version_id: newModrinthVersions[newModrinthVersions.length - 1].id,
+            last_version_id:
+              newModrinthVersions[newModrinthVersions.length - 1].id,
           })
         }
       }
@@ -103,21 +127,6 @@ module.exports.start = async () => {
   )
 
   await module.exports.openQueue()
-}
-
-if (process.env.NODE_ENV === 'development') {
-  cron.schedule('0 * * * * *', () => {
-    console.log('[SCAN] 💿 Starting scan')
-    module.exports.start()
-  })
-} else {
-  cron.schedule(
-    '0,30 * * * *',
-    () => {
-      console.log('[SCAN] 💿 Starting scan')
-      module.exports.start()
-    }
-  )
 }
 
 module.exports.openQueue = async () => {
@@ -129,20 +138,28 @@ module.exports.openQueue = async () => {
 
     for (const queueItem of queue) {
       const webhook_rows = JSON.parse(queueItem.webhooks)
-      await webhook_rows.map(async (row) => {
-        const webhook = await db.getWebhookByRow(row)
+      await webhook_rows.map(async (webhook_row) => {
+        const webhook = await db.getWebhookByRow(webhook_row)
 
         const config = JSON.parse(webhook.config)
 
         // Send webhook
         const data = webhooks.applyRowConfig(JSON.parse(queueItem.data), config)
-        await webhooks.send(webhook.payload_url, data, webhook.content_type, config)
+        await webhooks
+          .send(webhook.payload_url, data, webhook.content_type, config)
+          .catch(async (error) => {
+            if (error.response.status === 404) {
+              await db.webhookRecordFailByRow(webhook_row)
+            } else {
+              console.log(error)
+            }
+          })
 
         // Delete webhook in queue
         await db.removeQueueItemByRow(queueItem.id)
       })
 
-      await new Promise(r => setTimeout(r, 1000));
+      await new Promise((r) => setTimeout(r, 1000))
     }
 
     console.log('[QUEUE] 📭 Finished sending webhooks')

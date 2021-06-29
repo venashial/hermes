@@ -6,7 +6,11 @@ module.exports.send = async (
   content_type,
   config
 ) => {
-  if ((version.loaders.length == 2 || config.filter.mod_loader.includes(version.loaders[0])) && config.filter.version_type.includes(version.version_type)) {
+  if (
+    (version.loaders.length == 2 ||
+      config.filter.mod_loader.includes(version.loaders[0])) &&
+    config.filter.version_type.includes(version.version_type)
+  ) {
     const body = createBody({ project, version }, content_type, config)
 
     await axios({
@@ -14,7 +18,8 @@ module.exports.send = async (
       url: url,
       data: body,
     }).catch(function (error) {
-      console.log('Webhook failed to send\n', error.response)
+      console.log('Webhook failed to send\n')
+      throw error
     })
   }
 }
@@ -59,7 +64,9 @@ function createBody({ project, version }, content_type, config) {
               ? ` (${version.version_type})`
               : config.filter.version_type.length == 1
               ? ` (${version.loaders.join(' & ') + ' '})`
-              : ` (${version.loaders.join(' & ') + ' '} ${version.version_type})`
+              : ` (${version.loaders.join(' & ') + ' '} ${
+                  version.version_type
+                })`
           }`,
           description: project.description,
           url: project.url,

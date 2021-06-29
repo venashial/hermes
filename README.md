@@ -51,16 +51,7 @@ Add the Heroku addon `Heroku Postgres`, it will automatically set the DATABASE_U
 
 ----
 ## Develop
-> Requires `node`, `docker`, and `docker-compose` to be installed
-### Part I: PostgreSQL (in Docker)
-```bash
-# go to directory
-$ cd dev/postgres/
-
-# start postgresql
-$ docker-compose up
-```
-### Part II: Node
+> Requires `node` to be installed
 ```bash
 # install dependencies
 $ npm install
@@ -69,12 +60,14 @@ $ npm install
 $ npm run dev
 ```
 
-
 ### TODOs
 #### Before release
 - [ ] Add docker postgres setup
 
 #### Sometime
+- [ ] Test Heroku deploy button
+- [ ] Add linter and prettier
+- [ ] Add Jest tests
 - [ ] Add curseforge links
 - [ ] Client side form errors
 - [ ] Modrinth project name preview
@@ -88,4 +81,4 @@ Pull requests are welcome.
 
 ----
 
-Hermes is not affilated with Modrinth.
+Hermes is not affiliated with Modrinth.

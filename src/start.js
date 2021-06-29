@@ -1,16 +1,16 @@
+const e = require('express')
 const express = require('express')
-const bodyParser = require('body-parser').json();
+const bodyParser = require('body-parser').json()
 const path = require('path')
 
-const db = require('./database')
-db.start()
+const knex = require('./database/knex.js')
 
 require('express-async-errors')
 
 module.exports = function startServer() {
   const app = express()
 
-  app.use(bodyParser);
+  app.use(bodyParser)
 
   app.use(express.static(path.join(__dirname, '../static')))
 
@@ -46,15 +46,18 @@ function errorMiddleware(error, req, res, next) {
     console.error(error)
 
     res.status(500)
-    res.json({
-      message: error.message,
-      ...(process.env.NODE_ENV === 'production'
-        ? null
-        : { stack: error.stack }),
-    })
+    if (process.env.NODE_ENV === 'production') {
+      res.json({
+        message: error.message,
+      })
+    } else {
+      res.json({
+        message: error.message,
+        stack: error.stack,
+      })
+    }
   }
 }
-
 
 function setupCloseOnExit(server) {
   async function exitHandler(options = {}) {

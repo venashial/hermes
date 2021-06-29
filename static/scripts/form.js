@@ -142,9 +142,9 @@ function setNextScan() {
 
   next_scan = document.getElementById('next_scan')
 
-  next_scan.innerText = `New versions are found in less than 30 minutes. Checks occur at **:00 and **:30. The next scan is ${
+  next_scan.innerHTML = `New versions are found in less than 30 minutes. Checks occur at **:00 and **:30. The next scan is ${
     minutes !== 0 ? 'in ' + minutes + ' minutes' : 'happening right now'
-  }.`
+  }. <br />*If present on Modrinth project.`
 
   setTimeout(setNextScan, 60000 - date.getSeconds() * 1000 + 100)
 }

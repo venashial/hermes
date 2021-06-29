@@ -1,34 +1,10 @@
-const { Pool } = require('pg')
-
-const createTables = require('./create')
-
-const pqconfig = {
-  connectionString: process.env.DATABASE_URL,
-}
-
-if (process.env.USE_DATABASE_SSL) {
-  pqconfig.ssl = { rejectUnauthorized: false }
-}
-
-const pool = new Pool({ ...pqconfig })
-
-module.exports.start = async () => {
-  try {
-    await pool.connect()
-  } catch (error) {
-    console.error('Database connection error')
-    throw error
-  } finally {
-    console.log('[STARTUP] 📡 Connected to database')
-    createTables(pool)
-  }
-}
+const knex = require('./knex')
 
 module.exports.delete = async () => {
   try {
-    await pool.query('DROP TABLE IF EXISTS projects')
-    await pool.query('DROP TABLE IF EXISTS webhooks')
-    await pool.query('DROP TABLE IF EXISTS queue')
+    await knex('projects').del()
+    await knex('webhooks').del()
+    await knex('queue').del()
   } catch (error) {
     throw error
   }
@@ -44,10 +20,7 @@ module.exports.newProject = async ({
   last_version_id,
 }) => {
   try {
-    await pool.query(
-      'INSERT INTO projects (project_id, last_updated, last_version_id) VALUES ($1, $2, $3)',
-      [project_id, last_updated, last_version_id]
-    )
+    await knex('projects').insert({ project_id, last_updated, last_version_id })
   } catch (error) {
     throw error
   }
@@ -55,11 +28,7 @@ module.exports.newProject = async ({
 
 module.exports.getProjectById = async (project_id) => {
   try {
-    return (
-      await pool.query('SELECT * FROM projects WHERE project_id = $1', [
-        project_id,
-      ])
-    ).rows[0]
+    return (await knex('projects').where({ project_id }))[0]
   } catch (error) {
     throw error
   }
@@ -67,7 +36,7 @@ module.exports.getProjectById = async (project_id) => {
 
 module.exports.getAllProjects = async () => {
   try {
-    return (await pool.query('SELECT * FROM projects ')).rows
+    return (await knex('projects'))
   } catch (error) {
     throw error
   }
@@ -75,11 +44,7 @@ module.exports.getAllProjects = async () => {
 
 module.exports.existingProjectById = async (project_id) => {
   try {
-    const rows = (
-      await pool.query('SELECT * FROM projects WHERE project_id = $1', [
-        project_id,
-      ])
-    ).rows
+    const rows = (await knex('projects').where({ project_id }))
 
     if (rows.length > 0) {
       return true
@@ -96,10 +61,7 @@ module.exports.updateProjectById = async (
   { last_updated, last_version_id }
 ) => {
   try {
-    await pool.query(
-      'UPDATE projects SET last_updated = $2, last_version_id = $3 WHERE project_id = $1',
-      [project_id, last_updated, last_version_id]
-    )
+    await knex('projects').where({ project_id }).update({ last_updated, last_version_id })
   } catch (error) {
     throw error
   }
@@ -107,7 +69,7 @@ module.exports.updateProjectById = async (
 
 module.exports.removeProjectById = async (project_id) => {
   try {
-    await pool.query('DELETE FROM projects WHERE project_id = $1', [project_id])
+    await knex('projects').where({ project_id }).del()
   } catch (error) {
     throw error
   }
@@ -124,19 +86,15 @@ module.exports.newWebhook = async ({
   config,
 }) => {
   try {
-    await pool.query(
-      'INSERT INTO webhooks (project_id, payload_url, content_type, config) VALUES ($1, $2, $3, $4)',
-      [project_id, payload_url, content_type, JSON.stringify(config)]
-    )
+    await knex('webhooks').insert({ project_id, payload_url, content_type, config: JSON.stringify(config) })
   } catch (error) {
     throw error
   }
 }
 
-module.exports.getWebhookByRow = async (row_id) => {
+module.exports.getWebhookByRow = async (id) => {
   try {
-    return (await pool.query('SELECT * FROM webhooks WHERE id = $1', [row_id]))
-      .rows[0]
+    return (await knex('webhooks').where({ id }))[0]
   } catch (error) {
     throw error
   }
@@ -158,11 +116,7 @@ module.exports.existingWebhookByURL = async (payload_url) => {
 
 module.exports.getWebhooksByURL = async (payload_url) => {
   try {
-    return (
-      await pool.query('SELECT * FROM webhooks WHERE payload_url = $1', [
-        payload_url,
-      ])
-    ).rows
+    return (await knex('webhooks').where({ payload_url }))
   } catch (error) {
     throw error
   }
@@ -170,26 +124,20 @@ module.exports.getWebhooksByURL = async (payload_url) => {
 
 module.exports.getWebhooksByProject = async (project_id) => {
   try {
-    return (
-      await pool.query('SELECT * FROM webhooks WHERE project_id = $1', [
-        project_id,
-      ])
-    ).rows
+    return (await knex('webhooks').where({ project_id }))
   } catch (error) {
     throw error
   }
 }
 
-module.exports.webhookRecordFailByRow = async (row_id) => {
+module.exports.webhookRecordFailByRow = async (id) => {
   try {
-    await pool.query(
-      'UPDATE webhooks SET failed_attempts = failed_attempts + 1 WHERE id = $1',
-      [row_id]
-    )
+    await knex('webhooks').where({ id }).update({ failed_attempts: knex.raw('failed_attempts + 1') })
 
-    const row = await module.exports.getWebhookByRow(row_id)
+    const row = await module.exports.getWebhookByRow(id)
 
     if (row.failed_attempts >= 3) {
+      console.log('[SEND FAIL] 💥 Removed webhook(s)')
       module.exports.removeWebhooksByUrl(row.payload_url)
     }
   } catch (error) {
@@ -212,9 +160,7 @@ module.exports.removeWebhooksByUrl = async (payload_url) => {
       })
     )
 
-    await pool.query('DELETE FROM webhooks WHERE payload_url = $1', [
-      payload_url,
-    ])
+    await knex('webhooks').where({ payload_url }).del()
   } catch (error) {
     throw error
   }
@@ -222,7 +168,7 @@ module.exports.removeWebhooksByUrl = async (payload_url) => {
 
 module.exports.removeWebhooksByProject = async (project_id) => {
   try {
-    await pool.query('DELETE FROM webhooks WHERE project_id = $1', [project_id])
+    await knex('webhooks').where({ project_id }).del()
   } catch (error) {
     throw error
   }
@@ -234,8 +180,7 @@ Queue table
 
 module.exports.getQueue = async () => {
   try {
-    return (await pool.query('SELECT * FROM queue ORDER BY version_date ASC'))
-      .rows
+    return (await knex('queue').orderBy('version_date', 'asc'))
   } catch (error) {
     throw error
   }
@@ -248,18 +193,15 @@ module.exports.newQueueItem = async ({
   version_date,
 }) => {
   try {
-    await pool.query(
-      'INSERT INTO queue (project_id, data, webhooks, version_date) VALUES ($1, $2, $3, to_timestamp($4))',
-      [project_id, data, webhooks, new Date(version_date).valueOf()]
-    )
+    await knex('queue').insert({ project_id, data, webhooks, version_date: new Date(version_date).valueOf() })
   } catch (error) {
     throw error
   }
 }
 
-module.exports.removeQueueItemByRow = async (row_id) => {
+module.exports.removeQueueItemByRow = async (id) => {
   try {
-    await pool.query('DELETE FROM queue WHERE id = $1', [row_id])
+    await knex('queue').where({ id }).del()
   } catch (error) {
     throw error
   }
