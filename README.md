@@ -63,15 +63,16 @@ $ npm run dev
 ### TODOs
 #### Before release
 - [ ] Add docker postgres setup
+- [ ] Test Heroku deploy button
+
 
 #### Sometime
-- [ ] Test Heroku deploy button
-- [ ] Add linter and prettier
-- [ ] Add Jest tests
-- [ ] Add curseforge links
-- [ ] Client side form errors
-- [ ] Modrinth project name preview
-- [ ] Discord/json message preview
+- [ ] Frontend rewrite in Svelte
+  - [ ] Add Jest tests
+  - [ ] Add curseforge links
+  - [ ] Client side form errors
+  - [ ] Modrinth project name preview
+  - [ ] Discord/json message preview
 
 ## Contributing
 Pull requests are welcome.
