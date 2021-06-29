@@ -3,5 +3,10 @@
   "description": "Webhooks and RSS for Modrinth",
   "repository": "https://github.com/venashial/hermes",
   "logo": "https://hermes-webhooks.herokuapp.com/images/logo/icon-512x512.png",
-  "keywords": ["node", "express", "webhooks", "rss", "modrinth"]
+  "keywords": ["node", "express", "webhooks", "rss", "modrinth"],
+  "addons": [
+    {
+      "plan": "heroku-postgresql:hobby-dev"
+    }
+  ]
 }

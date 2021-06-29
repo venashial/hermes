@@ -30,17 +30,18 @@ Supported formats: `rss`, `atom`, `json`.
 | ![](https://img.shields.io/website?style=for-the-badge&url=https%3A%2F%2Fhermes-webhooks.herokuapp.com%2F) | ![](https://img.shields.io/uptimerobot/ratio/key?style=for-the-badge) | [https://hermes-webhooks.herokuapp.com/](https://hermes-webhooks.herokuapp.com/) |
 
 ## Installation
-> Required enviroment variables: <br />
+> Required environment variables: <br />
 > **DOMAIN** (`'example.com'`) <br />
 > **DATABASE_URL** (`'postgres://user:password@examplepostgres.com/databasename'`)
 #### Docker (Recommended)
-Use the Docker image `ghcr.io/venashial/hermes`.
+Use the Docker image `ghcr.io/venashial/hermes`. In addition, run the docker image `postgres`.
 
 #### Node
-Clone the repo, install dependencies, and run `npm start`.
+Clone the repo, install dependencies, and run `npm start`. In addition, run an instance of Postgres.
 
 #### Heroku
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy) <br />
+Add the Heroku addon `Heroku Postgres`, it will automatically set the DATABASE_URL environment variable.
 
 ## Develop
 ```bash
