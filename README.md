@@ -56,6 +56,9 @@ Add the Heroku addon `Heroku Postgres`, it will automatically set the DATABASE_U
 # install dependencies
 $ npm install
 
+# set up database
+$ npm run migrate:latest
+
 # serve with hot reload at localhost:3000
 $ npm run dev
 ```

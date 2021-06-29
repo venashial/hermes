@@ -24,7 +24,7 @@ const production = {
           done(err, conn)
           process.exit(1)
         } else {
-          conn.query('SELECT set_limit(0.01);', function (err) {
+          conn.query('SELECT * FROM pg_stat_activity;', function (err) {
             console.log('[STARTUP] 📡 Connected to database')
             done(err, conn)
           })

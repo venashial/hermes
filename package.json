@@ -4,10 +4,12 @@
   "private": true,
   "main": "index.js",
   "scripts": {
-    "dev": "NODE_ENV=development npx knex migrate:latest && NODE_ENV=development nodemon --ignore ./views/ --ignore ./static/ ./index.js localhost 8080",
-    "dev-pg": "NODE_ENV=production DATABASE_URL='postgres://user:password@localhost:5432/db' nodemon --ignore ./views/ --ignore ./static/ ./index.js localhost 8080",
-    "start": "NODE_ENV=production node ./index.js",
-    "lint": "eslint '**/*.js' --ignore-pattern node_modules/"
+    "dev": "NODE_ENV=development nodemon --ignore ./views/ --ignore ./static/ ./index.js localhost 8080",
+    "dev-pg": "NODE_ENV=production DATABASE_URL='postgres://user:password@localhost:5432/db' DOMAIN='localhost:8080' nodemon --ignore ./views/ --ignore ./static/ ./index.js localhost 8080",
+    "migrate:latest": "npx knex migrate:latest",
+    "start": "NODE_ENV=production npm run migrate:latest || NODE_ENV=production node ./index.js",
+    "lint": "eslint '**/*.js' --ignore-pattern node_modules/",
+    "postinstall" : "npm run migrate:latest"
   },
   "dependencies": {
     "axios": "^0.21.1",
