@@ -52,6 +52,12 @@ $ npm install
 $ npm run dev
 ```
 
+### Todo
+- [ ] Add curseforge links
+- [ ] Client side form errors
+- [ ] Modrinth project name preview
+- [ ] Discord/json message preview
+
 ## Contributing
 Pull requests are welcome.
 
