@@ -7,6 +7,8 @@
 
 Hermes is a service that connects webhooks to Modrinth project releases. In addition, it has a RSS, Atom, and JSON feeds for Modrinth projects. The Hermes backend uses NodeJS with better-sqlite3. The frontend uses vanilla JS with server-side EJS for templating.
 
+----
+
 ## Usage
 ### Webhooks
 1. Get a webhook URL from an app like Discord.
@@ -24,12 +26,13 @@ Supported formats: `rss`, `atom`, `json`.
 > ```
 
 
-## Public instances
+### Public instances
 | Status | Uptime | URL |
 | --- | --- | --- |
 | ![](https://img.shields.io/website?style=for-the-badge&url=https%3A%2F%2Fhermes-webhooks.herokuapp.com%2F) | ![](https://img.shields.io/uptimerobot/ratio/key?style=for-the-badge) | [https://hermes-webhooks.herokuapp.com/](https://hermes-webhooks.herokuapp.com/) |
 
-## Installation
+----
+## Alternative self-host installation
 > Required environment variables: <br />
 > **DOMAIN** (`'example.com'`) <br />
 > **DATABASE_URL** (`'postgres://user:password@examplepostgres.com/databasename'`)<br />
@@ -43,9 +46,21 @@ Clone the repo, install dependencies, and run `npm start`. In addition, run an i
 
 #### Heroku
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy) <br />
-Add the Heroku addon `Heroku Postgres`, it will automatically set the DATABASE_URL environment variable.
+Add the Heroku addon `Heroku Postgres`, it will automatically set the DATABASE_URL environment variable. [Make your Heroku app stay online.](https://kaffeine.herokuapp.com)
 
+
+----
 ## Develop
+> Requires `node`, `docker`, and `docker-compose` to be installed
+### Part I: PostgreSQL (in Docker)
+```bash
+# go to directory
+$ cd dev/postgres/
+
+# start postgresql
+$ docker-compose up
+```
+### Part II: Node
 ```bash
 # install dependencies
 $ npm install
@@ -54,11 +69,10 @@ $ npm install
 $ npm run dev
 ```
 
+
 ### TODOs
 #### Before release
 - [ ] Add docker postgres setup
-- [ ] Update development guide (with postgres)
-- [ ] Update Heroku instructions for always online instance (credit card & uptime bot)
 
 #### Sometime
 - [ ] Add curseforge links
