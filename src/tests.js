@@ -2,14 +2,6 @@ const modrinth = require('./modrinth')
 
 const webhooks = require('./webhooks')
 
-const database = require('./database')
-
-dbtest()
-
-async function dbtest() {
-  database.connect()
-}
-
 //test()
 
 async function test() {

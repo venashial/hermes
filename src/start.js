@@ -2,6 +2,9 @@ const express = require('express')
 const bodyParser = require('body-parser').json();
 const path = require('path')
 
+const db = require('./database')
+db.start()
+
 require('express-async-errors')
 
 module.exports = function startServer() {

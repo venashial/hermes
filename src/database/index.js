@@ -6,28 +6,30 @@ let pool = new Pool({
   connectionString: process.env.DATABASE_URL,
 })
 
-module.exports.connect = async () => {
+module.exports.start = async () => {
   try {
-    await pool.connect()
-    console.log('📡 Connected to database')
-
-    createTables(pool)
+    connect()
   } catch (error) {
     try {
-      pool = new Pool({
-        connectionString: process.env.DATABASE_URL + '?ssl=true',
-      })
-  
-      await pool.connect()
-
-      console.log('📡 Connected to database')
-
-      createTables(pool)
+      connect(true)
     } catch (error) {
       console.error('Database connection error')
       throw error
     }
+  } finally {
+    console.log('📡 Connected to database')
+    createTables(pool)
   }
+}
+
+async function connect(shouldUseSSL = false) {
+  if (shouldUseSSL) {
+    pool = new Pool({
+      connectionString: process.env.DATABASE_URL,
+      ssl: { rejectUnauthorized: false }
+    })
+  }
+  await pool.connect()
 }
 
 /*

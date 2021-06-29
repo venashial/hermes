@@ -108,6 +108,10 @@ function updateMessage(ok, message) {
     document.getElementById('message').classList = 'card message error fade-in'
   }
 
+  if (message[0] === '{') {
+    message = (JSON.parse(message)).message
+  }
+
   document.getElementById('message-text').innerText = message
 
   location.hash = '#message-anchor'
