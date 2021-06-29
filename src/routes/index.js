@@ -12,7 +12,7 @@ module.exports = function (app) {
   })
 
   // uptime
-  app.get('/uptime', function (req, res) {
+  app.get('/api/uptime', function (req, res) {
     res.json({ uptime: process.uptime() })
   })
 
