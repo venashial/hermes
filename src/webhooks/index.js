@@ -21,6 +21,9 @@ module.exports.send = (
 
 function applyRowConfig({ project, version }, config) {
   if (config.hiddenItems) {
+    if (config.hiddenItems.includes('author')) {
+      delete project.author
+    }
     if (config.hiddenItems.includes('description')) {
       delete project.description
     }
@@ -83,11 +86,6 @@ function createBody({ project, version }, content_type) {
               }`,
             },
           ],
-          author: {
-            name: project.author.username,
-            url: project.author.url,
-            icon_url: project.author.avatar_url,
-          },
           thumbnail: {
             url: project.icon_url,
           },
@@ -101,6 +99,9 @@ function createBody({ project, version }, content_type) {
         name: 'Changelog',
         value: version.changelog,
       })
+    }
+    if (project.author) {
+      body.embeds[0].author = project.author
     }
   } else if (content_type === 'json') {
     body = { project, version }

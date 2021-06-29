@@ -12,6 +12,8 @@ module.exports = function (app) {
         const feed = await makeFeed(modrinthProject, req.params.format)
 
         res.send(feed)
+
+        console.log('📙 Rendered and sent feed')
     }
   })
 }

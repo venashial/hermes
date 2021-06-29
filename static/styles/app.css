@@ -26,6 +26,8 @@ body {
   --color-form-card: #f4f4f4;
   --color-input-border: #e0e1e4;
   --color-button: #e8e8e8;
+  --color-message-ok: #bbe4bf;
+  --color-message-error: #ffc7c5;
 }
 
 [data-theme='dark'] {
@@ -36,6 +38,8 @@ body {
   --color-form-card: #434247;
   --color-input-border: rgb(164, 164, 172);
   --color-button: #646464;
+  --color-message-ok: #25602a;
+  --color-message-error: #803c3c;
 }
 
 /* site */
@@ -74,10 +78,12 @@ h3,
   font-family: var(--title-font);
 }
 
-a {
+a, .link {
   color: var(--color-accent);
   border-bottom: 0.2rem dotted var(--color-accent);
   text-decoration: none;
+  display: inline;
+  cursor: pointer;
 }
 
 a:hover {
@@ -91,7 +97,7 @@ main {
 /* title-nav */
 .title-nav {
   display: flex;
-  margin: 2rem 0;
+  margin: 2rem 0 1rem 0;
   justify-content: space-between;
 }
 
@@ -128,7 +134,7 @@ main {
   color: var(--color-medium);
 }
 
-nav > a {
+nav > a, nav > .link {
   color: var(--color-medium);
   font-size: 1rem;
   line-height: 2;
@@ -269,6 +275,34 @@ button {
 .hint.negative-mar {
   margin-top: -0.1rem !important;
   margin-bottom: 0.25rem;
+}
+
+/* message */
+.message {
+  display: none;
+  margin-bottom: 1rem;
+}
+
+.message.ok {
+  background-color: var(--color-message-ok);
+}
+
+.message.error {
+  background-color: var(--color-message-error);
+}
+
+.fade-in {
+  animation: fade-in 0.5s;
+}
+
+@keyframes fade-in {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+.anchor {
+  position: absolute;
+  margin-top: -1rem;
 }
 
 /* footer */

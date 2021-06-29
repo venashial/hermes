@@ -1,8 +1,9 @@
 <h2>Add webhook</h2>
 <form class="card card-form" autocomplete="off">
   <div>
-    <label for="payload_url" id="add_payload_url" class="label required">Payload URL</label>
+    <label for="payload_url" class="label required">Payload URL</label>
     <input
+      id="add_payload_url"
       class="wide"
       type="text"
       name="payload_url"
@@ -29,7 +30,7 @@
       class="button button-margin"
       onclick="addProjectIDField()"
     >
-      Add another project
+      Add another project field
     </button>
   </div>
 
@@ -60,6 +61,8 @@
       Include additional data <span class="thinner">(If available)</span>
     </div>
     <div class="checkboxes">
+      <input type="checkbox" name="additional_data/author" checked />
+      <label for="additional_data/author">Author</label><br />
       <input type="checkbox" name="additional_data/description" checked />
       <label for="additional_data/description">Description</label><br />
       <input type="checkbox" name="additional_data/source_code" checked />
@@ -74,21 +77,27 @@
   </div>
 
   <div>
-    <button type="button" class="colored-button green" onclick="createWebhookRequest('add')">
+    <button
+      type="button"
+      class="colored-button green"
+      onclick="createWebhookRequest('add')"
+    >
       Add webhook
     </button>
   </div>
 
   <div class="hint" id="next_scan">
-    New versions are found in less than 30 minutes. Checks occur at **:00 and **:30.
+    New versions are found in less than 30 minutes. Checks occur at **:00 and
+    **:30.
   </div>
 </form>
 
 <h2>Remove webhook</h2>
 <form class="card card-form" autocomplete="off">
   <div>
-    <label for="payload_url" id="remove_payload_url" class="label required">Payload URL</label>
+    <label for="payload_url" class="label required">Payload URL</label>
     <input
+      id="remove_payload_url"
       class="wide"
       type="text"
       name="payload_url"
@@ -97,7 +106,11 @@
   </div>
 
   <div>
-    <button type="button" class="colored-button red" onlick="createWebhookRequest('remove')">
+    <button
+      type="button"
+      class="colored-button red"
+      onclick="createWebhookRequest('remove')"
+    >
       Remove webhook
     </button>
   </div>

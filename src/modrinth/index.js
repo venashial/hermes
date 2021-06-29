@@ -21,9 +21,8 @@ module.exports.getProjects = async (project_ids) => {
 
 // Get one project
 module.exports.getProject = async (project_id) => {
-  return (
-    await axios.get('https://api.modrinth.com/api/v1/mod/' + project_id)
-  ).data
+  return (await axios.get('https://api.modrinth.com/api/v1/mod/' + project_id).catch(error => {return error}))
+    .data
 }
 
 // Get versions of a project

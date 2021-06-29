@@ -6,7 +6,7 @@ function addProjectIDField() {
   insertAfter(projectIdFields[projectIdFields.length - 1], clone)
 }
 
-function createWebhookRequest(form) {
+async function createWebhookRequest(form) {
   const webhook = {}
   if (form === 'add') {
     webhook.payload_url = document.getElementById('add_payload_url').value
@@ -15,34 +15,41 @@ function createWebhookRequest(form) {
       .map((element) => element.value)
       .filter((project_id) => project_id.length > 0)
 
-    webhook.release_type = []
+    webhook.config = {}
+    webhook.config.filter = {}
+
+    webhook.config.filter.release_type = []
     if (document.getElementsByName('release_type/release')[0].value) {
-      webhook.release_type.push('release')
+      webhook.config.filter.release_type.push('release')
     }
     if (document.getElementsByName('release_type/beta')[0].value) {
-      webhook.release_type.push('beta')
+      webhook.config.filter.release_type.push('beta')
     }
     if (document.getElementsByName('release_type/alpha')[0].value) {
-      webhook.release_type.push('alpha')
+      webhook.config.filter.release_type.push('alpha')
     }
 
-    webhook.mod_loader = []
+    webhook.config.filter.mod_loader = []
     if (document.getElementsByName('mod_loader/fabric')[0].value) {
-      webhook.mod_loader.push('fabric')
+      webhook.config.filter.mod_loader.push('fabric')
     }
     if (document.getElementsByName('mod_loader/forge')[0].value) {
-      webhook.mod_loader.push('forge')
+      webhook.config.filter.mod_loader.push('forge')
     }
 
-    webhook.additional_data = []
-    if (document.getElementsByName('additional_data/description')[0].value) {
-      webhook.additional_data.push('description')
+    webhook.config.hiddenItems = []
+
+    if (!document.getElementsByName('additional_data/author')[0].checked) {
+      webhook.config.hiddenItems.push('author')
     }
-    if (document.getElementsByName('additional_data/source_code')[0].value) {
-      webhook.additional_data.push('source_code')
+    if (!document.getElementsByName('additional_data/description')[0].checked) {
+      webhook.config.hiddenItems.push('description')
     }
-    if (document.getElementsByName('additional_data/discord')[0].value) {
-      webhook.additional_data.push('discord')
+    if (!document.getElementsByName('additional_data/source_code')[0].checked) {
+      webhook.config.hiddenItems.push('source_code')
+    }
+    if (!document.getElementsByName('additional_data/discord')[0].checked) {
+      webhook.config.hiddenItems.push('discord')
     }
   } else if (form === 'remove') {
     webhook.payload_url = document.getElementById('remove_payload_url').value
@@ -50,7 +57,13 @@ function createWebhookRequest(form) {
 
   const method = form === 'add' ? 'POST' : 'DELETE'
 
-  send('POST', '/webhook', webhook)
+  const response = await send(method, '/api/webhook', webhook)
+
+  updateMessage(response.ok, await response.text())
+
+  if (response.ok) {
+    clearForm(form)
+  }
 }
 
 function setNextScan() {
@@ -83,7 +96,57 @@ async function send(method = 'GET', url = '', data = {}) {
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(data), // body data type must match 'Content-Type' header
+    body: JSON.stringify(data),
   })
-  return response.json() // parses JSON response into native JavaScript objects
+  return response
+}
+
+function updateMessage(ok, message) {
+  if (ok) {
+    document.getElementById('message').classList = 'card message ok fade-in'
+  } else {
+    document.getElementById('message').classList = 'card message error fade-in'
+  }
+
+  document.getElementById('message-text').innerText = message
+
+  location.hash = '#message-anchor'
+
+  setTimeout(() => {
+    history.pushState(
+      '',
+      document.title,
+      window.location.pathname + window.location.search
+    )
+  }, 800)
+
+  document.getElementById('message').style.display = 'flex'
+}
+
+function clearForm(form) {
+  if (form === 'add') {
+    document.getElementById('add_payload_url').value = ''
+    document.getElementsByName('content_type')[0].value = 'discord'
+    const project_ids = document.getElementsByName('project_ids')
+
+    project_ids.forEach((project_id, index) => {
+      if (index != 0) {
+        project_id.remove()
+      } else{
+        project_id.value = ''
+      }
+    })
+
+    document.getElementsByName('release_type/release')[0].value = true
+    document.getElementsByName('release_type/beta')[0].value = true
+    document.getElementsByName('release_type/alpha')[0].value = true
+    document.getElementsByName('mod_loader/fabric')[0].value = true
+    document.getElementsByName('mod_loader/forge')[0].value = true
+    document.getElementsByName('additional_data/author')[0].checked = true
+    document.getElementsByName('additional_data/description')[0].checked = true
+    document.getElementsByName('additional_data/source_code')[0].checked = true
+    document.getElementsByName('additional_data/discord')[0].checked = true
+  } else if (form === 'remove') {
+    document.getElementById('remove_payload_url').value = ''
+  }
 }
