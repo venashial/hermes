@@ -12,6 +12,7 @@ const postSchema = {
     project_ids: {
       type: 'array',
       items: { type: 'string' },
+      uniqueItems: true,
     },
     config: {
       type: 'object',
