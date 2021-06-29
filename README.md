@@ -32,7 +32,9 @@ Supported formats: `rss`, `atom`, `json`.
 ## Installation
 > Required environment variables: <br />
 > **DOMAIN** (`'example.com'`) <br />
-> **DATABASE_URL** (`'postgres://user:password@examplepostgres.com/databasename'`)
+> **DATABASE_URL** (`'postgres://user:password@examplepostgres.com/databasename'`)<br />
+> Optional: <br />
+> **USE_DATABASE_SSL** (`true`)
 #### Docker (Recommended)
 Use the Docker image `ghcr.io/venashial/hermes`. In addition, run the docker image `postgres`.
 
