@@ -44,7 +44,7 @@ Now go use Hermes at http://localhost:8050/! (Or `http://<server-ip>:8050/` and 
 
 #### Heroku (Recommended)
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy) <br />
-[Make your Heroku app stay online.](https://kaffeine.herokuapp.com) To run your app without a bedtime, add your credit card to your Heroku. (Heroku won't charge you for anything.)
+[Make your Heroku app stay online.](https://kaffeine.herokuapp.com) To run your app without a bedtime, add your credit card to your Heroku account. (Heroku won't charge you for anything.)
 
 #### Docker
 First, run a PostgreSQL container:
