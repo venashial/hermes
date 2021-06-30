@@ -54,7 +54,7 @@ Clone the repo, install dependencies, and run `npm start`. In addition, run an i
 
 #### Heroku
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy) <br />
-Add the Heroku addon `Heroku Postgres`, it will automatically set the DATABASE_URL environment variable. [Make your Heroku app stay online.](https://kaffeine.herokuapp.com)
+[Make your Heroku app stay online.](https://kaffeine.herokuapp.com) Also, to add dyno hours to your account, add your credit card. (Heroku won't charge you for anything.)
 
 
 ----

@@ -11,8 +11,11 @@
   ],
   "env": {
     "USE_DATABASE_SSL": {
-      "description": "Connects to database using SSL",
+      "description": "Connects to database using SSL. Keep this as 'true'",
       "value": "true"
+    },
+    "DOMAIN": {
+      "description": "The domain of the website you will be hosting Hermes on. Like example.com"
     }
   }
 }
