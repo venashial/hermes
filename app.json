@@ -8,11 +8,5 @@
     {
       "plan": "heroku-postgresql:hobby-dev"
     }
-  ],
-  "env": {
-    "USE_DATABASE_SSL": {
-      "description": "Connects to database using SSL",
-      "value": "true"
-    }
-  }
+  ]
 }

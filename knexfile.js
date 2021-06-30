@@ -9,9 +9,7 @@ const development = {
 const production = {
   client: 'pg',
   connection: process.env.DATABASE_URL,
-  ssl: process.env.USE_DATABASE_SSL
-    ? JSON.parse(process.env.USE_DATABASE_SSL)
-    : false,
+  ssl: { rejectUnauthorized: false },
   pool: {
     min: 2,
     max: 10,
