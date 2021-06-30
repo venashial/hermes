@@ -52,7 +52,7 @@ docker run --name hermes-postgres -e POSTGRES_PASSWORD=secretpassword -e POSTGRE
 ```
 Next, run the Hermes container: (Replace `example.com` with the domain where hermes will be)
 ```bash
-docker run --name hermes -e DATABASE_URL='postgres://username:secretpassword@localhost:5432/hermes' -e DOMAIN='example.com' -p 8050:8060/tcp --restart unless-stopped ghcr.io/venashial/hermes:master
+docker run --name hermes -e DATABASE_URL='postgres://username:secretpassword@localhost:5432/hermes' -e DOMAIN='example.com' -p 8050:8060/tcp --restart unless-stopped ghcr.io/venashial/hermes:latest
 ```
 You'll either want to change the port from 6000 to 80, and port forward that OR use something like Nginx to reverse proxy the
 

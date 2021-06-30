@@ -13,7 +13,7 @@ services:
       - hermes-db:/var/lib/postgresql/data
 
   hermes:
-    image: ghcr.io/venashial/hermes:master
+    image: ghcr.io/venashial/hermes:latest
     environment:
       DATABASE_URL: postgres://pguser:pgpass@hermes-postgres:5432/pgdb
     depends_on:
