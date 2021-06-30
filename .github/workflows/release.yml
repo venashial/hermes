@@ -18,8 +18,10 @@ jobs:
         id: version-detect
         with:
           create-tag: false
-      - 
-        uses: actions-ecosystem/action-push-tag@v1
-        with:
-          tag: ${{ steps.version-detect.outputs.current-version }}
-          message: 'v${{ steps.version-detect.outputs.current-version }}'
+      - name: Commit report
+        run: |
+          git config --global user.name '${{ github.actor }}'
+          git config --global user.email '${{ github.actor }}@users.noreply.github.com'
+          git tag -a v${{steps.version-detect.outputs.current-version}} -m "v${{steps.version-detect.outputs.current-version}"
+          git commit -m "Automated release v${{steps.version-detect.outputs.current-version}}"
+          git push --follow-tags
