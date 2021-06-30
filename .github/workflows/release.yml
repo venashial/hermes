@@ -19,7 +19,7 @@ jobs:
         with:
           create-tag: false
       - name: Commit report
-        if: "${{ steps.version-detect.outputs.current-version !== steps.version-detect.outputs.previous-version }}"
+        if: "${{ steps.version-detect.outputs.current-version != steps.version-detect.outputs.previous-version }}"
         run: |
           git config --global user.name '${{ github.actor }}'
           git config --global user.email '${{ github.actor }}@users.noreply.github.com'
