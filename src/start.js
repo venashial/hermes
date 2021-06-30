@@ -5,6 +5,8 @@ const path = require('path')
 
 const knex = require('./database/knex.js')
 
+require('./database/migrate')()
+
 require('express-async-errors')
 
 module.exports = function startServer() {
