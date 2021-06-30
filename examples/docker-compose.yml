@@ -1,0 +1,25 @@
+version: "3.8"
+
+services:
+  hermes-postgres:
+    image: postgres
+    environment:
+      POSTGRES_USER: pguser
+      POSTGRES_PASSWORD: pgpass
+      POSTGRES_DB: pgdb
+    ports: 
+      - '5432:5432'
+    volumes:
+      - hermes-db:/var/lib/postgresql/data
+
+  hermes:
+    image: ghcr.io/venashial/hermes:master
+    environment:
+      DATABASE_URL: postgres://pguser:pgpass@hermes-postgres:5432/pgdb
+    depends_on:
+      - hermes-postgres
+    ports:
+      - '8050:8060'
+        
+volumes:
+  hermes-db:
