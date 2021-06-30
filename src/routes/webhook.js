@@ -130,11 +130,15 @@ module.exports = function (app) {
       return
     }
 
-    res.status(200).send('Successfully removed webhook: ' + webhook.payload_url)
+    if (await db.existingWebhookByURL(webhook.payload_url)) {
+      await db.removeWebhooksByUrl(webhook.payload_url)
 
-    await db.removeWebhooksByUrl(webhook.payload_url)
-
-    console.log('[USER] 💥 Removed webhook')
+      res.status(200).send('Successfully removed webhook: ' + webhook.payload_url)
+  
+      console.log('[USER] 💥 Removed webhook')
+    } else {
+      res.status(400).send('That webhook doesn\'t exist yet or already was removed.')
+    }
   })
 }
 
