@@ -14,6 +14,6 @@ WORKDIR /usr/src/hermes
 COPY . /usr/src/hermes/
 RUN npm ci
 
-EXPOSE 8080
+EXPOSE 8060
 
 ENTRYPOINT [ "npm", "start" ]
