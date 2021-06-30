@@ -311,6 +311,10 @@ button {
   100% { opacity: 1; }
 }
 
+.message-inner {
+  overflow-x: auto;
+}
+
 .anchor {
   position: absolute;
   margin-top: -1rem;
