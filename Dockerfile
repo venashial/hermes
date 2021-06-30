@@ -12,8 +12,13 @@ WORKDIR /usr/src/hermes
 
 # copy the app, note .dockerignore
 COPY . /usr/src/hermes/
-RUN npm ci
+
+ENV NODE_ENV=production
+
+RUN npm ci  \
+    # Write entrypoint.
+    && printf "ls\nnpm run migrate:latest\nnpm run start\n" > entrypoint.sh
 
 EXPOSE 8060
 
-ENTRYPOINT [ "npm", "start" ]
+CMD ["/bin/sh", "entrypoint.sh"]
