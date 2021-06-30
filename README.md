@@ -22,24 +22,25 @@ Supported formats: `rss`, `atom`, `json`.
 
 > Here's a feed URL example for [Lithium](https://modrinth.com/mod/lithium)
 > ```
-> https://hermes-webhooks.herokuapp.com/api/v1/feed/rss/lithium
+> https://hermes.venashial.design/api/v1/feed/rss/lithium
 > ```
 
 ----
 
 ## Public instances
-| Status | Uptime | URL |
-| --- | --- | --- |
-| ![](https://img.shields.io/website?style=for-the-badge&url=https%3A%2F%2Fhermes-webhooks.herokuapp.com%2F) | ![Uptime Robot ratio (30 days)](https://img.shields.io/uptimerobot/ratio/m788561541-bbab44bed8072f1b9ee7b9fe?style=for-the-badge) | [https://hermes-webhooks.herokuapp.com/](https://hermes-webhooks.herokuapp.com/) |
+| Status | Uptime | URL | Version |
+| --- | --- | --- | --- |
+| ![](https://img.shields.io/website?style=for-the-badge&url=https%3A%2F%2Fhermes.venashial.design%2F) | ![Uptime Robot ratio (30 days)](https://img.shields.io/uptimerobot/ratio/m788565267-e225bb8404dc18a09118f076?style=for-the-badge) | [https://hermes.venashial.design/](https://hermes.venashial.design/) | latest (stable) |
+| ![](https://img.shields.io/website?style=for-the-badge&url=https%3A%2F%2Fhermes-webhooks.herokuapp.com%2F) | ![Uptime Robot ratio (30 days)](https://img.shields.io/uptimerobot/ratio/m788561541-bbab44bed8072f1b9ee7b9fe?style=for-the-badge) | [https://hermes-webhooks.herokuapp.com/](https://hermes-webhooks.herokuapp.com/) | master (unstable) |
 
 ----
 ## Alternative self-hosting
 #### Docker compose (Recommended)
-Make a copy of [this file called `docker-compose.yml`](./examples/docker-compose.yml) and in the same directory as that file run:
+Make a copy of [this file called `docker-compose.yml`](./examples/docker-compose.yml) and replace `example.com` with the domain you will be using. In the same directory as that file run:
 ```bash
 docker-compose up -d
 ```
-Now go use Hermes at http://localhost:8050/! (Or at `http://<server-ip>:8050/` if you aren't running it locally. )
+Now go use Hermes at http://localhost:8050/! (Or `http://<server-ip>:8050/` and `https://<domain>/` depending on your configuration.)
 
 #### Heroku (Recommended)
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy) <br />
