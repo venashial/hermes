@@ -39,7 +39,15 @@ Supported formats: `rss`, `atom`, `json`.
 > Optional: <br />
 > **USE_DATABASE_SSL** (`true`)
 #### Docker (Recommended)
-Use the Docker image `ghcr.io/venashial/hermes`. In addition, run the docker image `postgres`.
+First, run a PostgreSQL container:
+```
+docker run --name hermes-postgres -e POSTGRES_PASSWORD=secretpassword -e POSTGRES_USER=username -e POSTGRES_DB=hermes -p 5432:5432/tcp -d --restart unless-stopped postgres
+```
+Next, run the Hermes container: (Replace `example.com` with the domain where hermes will be)
+```
+docker run --name hermes -e DATABASE_URL='postgres://username:secretpassword@localhost:5432/hermes' -e DOMAIN='example.com' -p 6000:5000/tcp --restart unless-stopped ghcr.io/venashial/hermes
+```
+You'll either want to change the port from 6000 to 80, and port forward that OR use something like Nginx to reverse proxy the
 
 #### Node
 Clone the repo, install dependencies, and run `npm start`. In addition, run an instance of Postgres.
