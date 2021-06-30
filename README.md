@@ -3,7 +3,7 @@
 </p>
 <h1 align="center">Hermes</h1>
 
-![](https://img.shields.io/github/package-json/v/venashial/hermes?style=for-the-badge) ![](https://img.shields.io/github/checks-status/venashial/hermes/master?style=for-the-badge) ![](https://img.shields.io/github/license/venashial/hermes?style=for-the-badge)
+![](https://img.shields.io/github/package-json/v/venashial/hermes?style=for-the-badge) ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/venashial/hermes/docker-build?style=for-the-badge) ![](https://img.shields.io/github/license/venashial/hermes?style=for-the-badge&) ![GitHub last commit](https://img.shields.io/github/last-commit/venashial/hermes?style=for-the-badge)
 
 Hermes is a service that connects webhooks to Modrinth project releases. In addition, it has a RSS, Atom, and JSON feeds for Modrinth projects. The Hermes backend uses NodeJS with better-sqlite3. The frontend uses vanilla JS with server-side EJS for templating.
 
@@ -29,7 +29,7 @@ Supported formats: `rss`, `atom`, `json`.
 ### Public instances
 | Status | Uptime | URL |
 | --- | --- | --- |
-| ![](https://img.shields.io/website?style=for-the-badge&url=https%3A%2F%2Fhermes-webhooks.herokuapp.com%2F) | ![](https://img.shields.io/uptimerobot/ratio/key?style=for-the-badge) | [https://hermes-webhooks.herokuapp.com/](https://hermes-webhooks.herokuapp.com/) |
+| ![](https://img.shields.io/website?style=for-the-badge&url=https%3A%2F%2Fhermes-webhooks.herokuapp.com%2F) | ![Uptime Robot ratio (30 days)](https://img.shields.io/uptimerobot/ratio/m788561541-bbab44bed8072f1b9ee7b9fe?style=for-the-badge) | [https://hermes-webhooks.herokuapp.com/](https://hermes-webhooks.herokuapp.com/) |
 
 ----
 ## Alternative self-host installation
