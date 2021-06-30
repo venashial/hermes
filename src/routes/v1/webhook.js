@@ -1,8 +1,8 @@
 const validate = require('jsonschema').validate
 
-const db = require('../database')
+const db = require('../../database')
 
-const modrinth = require('../modrinth')
+const modrinth = require('../../modrinth')
 
 const postSchema = {
   type: 'object',
@@ -50,7 +50,7 @@ const deleteSchema = {
 }
 
 module.exports = function (app) {
-  app.post('/api/webhook', async function (req, res) {
+  app.post('/api/v1/webhook', async function (req, res) {
     const webhook = req.body
 
     const validationResult = validate(webhook, postSchema)
@@ -115,7 +115,7 @@ module.exports = function (app) {
     console.log('[USER] 🪝  Added new webhook')
   })
 
-  app.delete('/api/webhook', async function (req, res) {
+  app.delete('/api/v1/webhook', async function (req, res) {
     const webhook = req.body
 
     const validationResult = validate(webhook, deleteSchema)

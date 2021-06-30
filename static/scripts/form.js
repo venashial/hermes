@@ -57,7 +57,7 @@ async function createWebhookRequest(form) {
 
   const method = form === 'add' ? 'POST' : 'DELETE'
 
-  const response = await send(method, '/api/webhook', webhook)
+  const response = await send(method, '/api/v1/webhook', webhook)
 
   updateMessage(response.ok, await response.text())
 

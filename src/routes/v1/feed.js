@@ -1,19 +1,23 @@
-const modrinth = require('../modrinth')
+const modrinth = require('../../modrinth')
 
 const { Feed } = require('feed')
 
 module.exports = function (app) {
-  app.get('/api/feed/:format/:project_id', async function (req, res) {
+  app.get('/api/v1/feed/:format/:project_id', async function (req, res) {
     if (req.params.format !== 'rss' && req.params.format !== 'atom' && req.params.format !== 'json') {
       res.sendStatus(400)
     } else {
         const modrinthProject = await modrinth.getProject(req.params.project_id).catch(err => res.status(400).send('Couldn\'t find project on Modrinth'))
 
-        const feed = await makeFeed(modrinthProject, req.params.format)
+        if (modrinthProject) {
+          const feed = await makeFeed(modrinthProject, req.params.format)
 
-        res.send(feed)
-
-        console.log('[USER] 📙 Rendered and sent feed')
+          res.status(200).send(feed)
+  
+          console.log('[USER] 📙 Rendered and sent feed')
+        } else {
+          res.status(400).send('Couldn\'t get Modrinth mod')
+        }
     }
   })
 }

@@ -16,13 +16,13 @@ Hermes is a service that connects webhooks to Modrinth project releases. In addi
 3. Enter both on a public instance listed below or on your own local instance.
 
 ### Feeds (RSS, Atom, JSON)
-1. Get your Modrinth project ID.
-2. Make a feed URL using the structure `<hermes-instance>/api/feed/:format/:project_id`.<br />
+1. Get your Modrinth project ID or slug.
+2. Make a feed URL using the structure `<hermes-instance>/api/v1/feed/:format/:project_id_or_slug`.<br />
 Supported formats: `rss`, `atom`, `json`.
 
 > Here's a feed URL example for [Lithium](https://modrinth.com/mod/lithium)
 > ```
-> https://hermes-webhooks.herokuapp.com/api/feed/rss/gvQqBUqZ
+> https://hermes-webhooks.herokuapp.com/api/v1/feed/rss/lithium
 > ```
 
 ----
@@ -80,7 +80,6 @@ $ npm run dev
 
 ### TODOs
 - [ ] API tests
-- [ ] Fix modrinth version timestamps
 - [ ] Frontend rewrite in Svelte
   - [ ] Add Jest tests
   - [ ] Add curseforge links

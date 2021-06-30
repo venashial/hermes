@@ -1,8 +1,8 @@
 const version = require('../../package.json').version
 
 module.exports = function (app) {
-  require('./webhook')(app)
-  require('./feed')(app)
+  require('./v1/webhook')(app)
+  require('./v1/feed')(app)
 
   // index page
   app.get('/', function (req, res) {
@@ -12,7 +12,7 @@ module.exports = function (app) {
   })
 
   // uptime
-  app.get('/api/uptime', function (req, res) {
+  app.get('/api/v1/uptime', function (req, res) {
     res.json({ uptime: process.uptime() })
   })
 
