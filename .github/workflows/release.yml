@@ -9,9 +9,18 @@ jobs:
   tag-new-versions:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      -
+        uses: actions/checkout@v2
         with:
           fetch-depth: 2
-      - uses: salsify/action-detect-and-tag-new-version@v2
+          persist-credentials: false
+      -
+        uses: salsify/action-detect-and-tag-new-version@v2
+        id: version-detect
         with:
-          create-tag: true
+          create-tag: false
+      - 
+        uses: actions-ecosystem/action-push-tag@v1
+        with:
+          tag: ${{ steps.version-detect.outputs.current-version }}
+          message: 'v${{ steps.version-detect.outputs.current-version }}'
