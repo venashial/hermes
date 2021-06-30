@@ -8,10 +8,14 @@ const development = {
 
 const production = {
   client: 'pg',
-  connection: process.env.DATABASE_URL,
-  ssl: process.env.USE_DATABASE_SSL
-    ? JSON.parse(process.env.USE_DATABASE_SSL)
-    : false,
+  connection: {
+    connectionString: process.env.DATABASE_URL,
+    ssl: process.env.USE_DATABASE_SSL
+      ? JSON.parse(process.env.USE_DATABASE_SSL)
+        ? { rejectUnauthorized: false }
+        : false
+      : false,
+  },
   pool: {
     min: 2,
     max: 10,
@@ -20,7 +24,7 @@ const production = {
       conn.query('SET timezone="UTC";', function (err) {
         if (err) {
           // first query failed, return error and don't try to make next query
-          console.log('[STARTUP] 🚫 Couldn\'t connect to database')
+          console.log("[STARTUP] 🚫 Couldn't connect to database")
           done(err, conn)
           process.exit(1)
         } else {
