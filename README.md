@@ -7,13 +7,18 @@
 
 Hermes is a service that connects webhooks to Modrinth project releases. In addition, it has a RSS, Atom, and JSON feeds for Modrinth projects. The Hermes backend uses NodeJS and is connected to a PostgreSQL database. The frontend uses vanilla JS with server-side EJS for templating.
 
+#### *⚠️ Not actively maintained.* Webhooks may eventually become part of Modrinth natively.
+
 ----
 
 ## Usage
-### Webhooks
+
+> Webhooks currently aren't working. If you want to receive discord updates, you can use [a discord RSS bot](https://monitorss.xyz/) with the feed, https://hermes-webhooks.herokuapp.com/api/v1/feed/rss/lithium, replacing `lithium` with your mod slug or id
+
+<!-- ### Webhooks
 1. Get a webhook URL from an app like Discord.
 2. Get one or multiple Modrinth project IDs.
-3. Enter both on a public instance listed below or on your own local instance.
+3. Enter both on a public instance listed below or on your own local instance. -->
 
 ### Feeds (RSS, Atom, JSON)
 1. Get your Modrinth project ID or slug.
@@ -22,7 +27,7 @@ Supported formats: `rss`, `atom`, `json`.
 
 > Here's a feed URL example for [Lithium](https://modrinth.com/mod/lithium)
 > ```
-> https://hermes.venashial.design/api/v1/feed/rss/lithium
+> https://hermes-webhooks.herokuapp.com/api/v1/feed/rss/lithium
 > ```
 
 ----
@@ -30,8 +35,8 @@ Supported formats: `rss`, `atom`, `json`.
 ## Public instances
 | Status | Uptime | URL | Version |
 | --- | --- | --- | --- |
-| ![](https://img.shields.io/website?style=for-the-badge&url=https%3A%2F%2Fhermes.venashial.design%2F) | ![Uptime Robot ratio (30 days)](https://img.shields.io/uptimerobot/ratio/m788565267-e225bb8404dc18a09118f076?style=for-the-badge) | [https://hermes.venashial.design/](https://hermes.venashial.design/) | latest (stable) |
 | ![](https://img.shields.io/website?style=for-the-badge&url=https%3A%2F%2Fhermes-webhooks.herokuapp.com%2F) | ![Uptime Robot ratio (30 days)](https://img.shields.io/uptimerobot/ratio/m788561541-bbab44bed8072f1b9ee7b9fe?style=for-the-badge) | [https://hermes-webhooks.herokuapp.com/](https://hermes-webhooks.herokuapp.com/) | master (unstable) |
+<!-- | ![](https://img.shields.io/website?style=for-the-badge&url=https%3A%2F%2Fhermes.venashial.design%2F) | ![Uptime Robot ratio (30 days)](https://img.shields.io/uptimerobot/ratio/m788565267-e225bb8404dc18a09118f076?style=for-the-badge) | [https://hermes.venashial.design/](https://hermes.venashial.design/) | latest (stable) | -->
 
 ----
 ## Alternative self-hosting
